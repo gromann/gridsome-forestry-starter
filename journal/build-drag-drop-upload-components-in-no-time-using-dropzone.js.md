@@ -2,7 +2,8 @@
 date: 2021-03-05
 author: Nichlas W. Andersen
 title: Build Drag&Drop upload components in no time using Dropzone.js
-excerpt: Build Drag&Drop upload components in no time using Dropzone.js
+excerpt: In this guide you will learn how to build a vue.js component that uses Drag&Drop
+  for simple image uploads in no time.
 
 ---
 In my first guide, I want to show you how to build a Drag&Drop inside your Vue.js application. This is the first part in the series on how to securely upload your files to an S3 Bucket from vue.Js.
