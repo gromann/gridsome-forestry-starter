@@ -11,8 +11,7 @@ project_fg_color: "#000000"
 sumary: ''
 
 ---
-
-In my first guide, I want to show you how to build a Drag&Drop inside your Vue.js application. This is the first part in the series on how to securely upload your files to an S3 Bucket from vue.Js. 
+In my first guide, I want to show you how to build a Drag&Drop inside your Vue.js application. This is the first part in the series on how to securely upload your files to an S3 Bucket from vue.Js.
 
 For uploading the images we are going to use vue-dropzone, and to make the upload process more secure the images will at first be uploaded to a .net server and from there it will be streamed to your S3 Bucket.
 
@@ -38,10 +37,10 @@ I will use the vue wrapper of dropzone, called vue-Dropzone [vue-Dropzone](https
 
 First of all, we are adding dropzone to our project.
 
-
 ``` js
     npm install vue2-dropzone
 ```
+
 After the installation, you have full access to the dropzone.js functionality documented under: and it could be imported like any other vue-component.
 
 Next, we will set up the dropzone component, this should look something like this:
@@ -49,7 +48,6 @@ Next, we will set up the dropzone component, this should look something like thi
 If The Image was uploaded successfully, it will be displayed like on the left, with the image name on Huver.
 
 Since we do not allow duplicated images on our S3 Bucket, adding the same Image twice will lead to an error (right), the image will be marked and on hover, the error message will be displayed.
-
 
 ```js
     <template>
@@ -136,4 +134,6 @@ With this options set, our component will send a formData Object to the given UR
 
 You can also intercept Dropzone at different stages and execute additional code. For example, I'm appending the location where the image should be saved to the request, by simply listening to the _@vdropzone-sending_ event. Again you can find the whole list of supported events in the  [dropzone.js documentation](https://www.dropzonejs.com/ "dropzone.js docs").
 
-This was the first part of my series on how to securely upload anything to Amazon S3. In the next part, I'm going to explain how to stream the image through a .net Core 3.1 Api and store a reference of the Image inside it
+This was the first part of my series on how to securely upload anything to Amazon S3. In the next part, I'm going to explain how to set up an Amazon S3 Bucket to store the images in.
+
+stream the image through a .net Core 3.1 Api and store a reference of the Image inside it
