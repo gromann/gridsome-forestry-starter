@@ -11,9 +11,9 @@
             <div class="categories-container">
               <div class="categories">
                 <span class="label">Categories</span>
-                <span 
+                <span
                   class="category"
-                  v-for="(category, index) in $page.post.categories" 
+                  v-for="(category, index) in $page.post.categories"
                   :key="index"
                   v-text="category"
                 />
@@ -30,8 +30,10 @@
         <div v-html="$page.post.content" class="content" />
 
       </div>
-
     </div>
+<!--    related section -->
+    <LatestJournals :journals="$page.journals.edges" />
+
   </Layout>
 </template>
 
@@ -45,11 +47,30 @@ query ProjectPost ($path: String!) {
     project_bg_color
     project_fg_color
   }
+
+  journals: allProjectPost(perPage: 4) {
+  edges {
+  node {
+  id
+  path
+  title
+  excerpt
+  }
+  }
+  }
+
+
 }
+
 </page-query>
 
 <script>
-export default {
+  import LatestJournals from "@/components/LatestJournals"
+
+  export default {
+components:{
+  LatestJournals
+},
   metaInfo () {
     return {
       title: this.$page.post.title,
@@ -86,5 +107,18 @@ export default {
 }
 .category:last-of-type:after {
   content: '';
+}
+p {
+  line-height: 1.5;
+  font-size: 1.15rem;
+}
+h2 {
+  font-size: 2rem;
+}
+h3 {
+  font-size: 1.5rem;
+}
+h4, h5, h6 {
+  font-size: 1.15rem;
 }
 </style>

@@ -9,9 +9,9 @@
       </div>
     </div>
 
-    <g-link 
+    <g-link
       :to="item.node.path"
-      v-for="item in $page.posts.edges" 
+      v-for="item in $page.posts.edges"
       :key="item.node.id"
       class="journal-post"
     >
@@ -20,13 +20,13 @@
         <p class="journal-excerpt">{{ item.node.excerpt }}</p>
       </div>
     </g-link>
-      
+
   </Layout>
 </template>
 
 <page-query>
 query Journal {
-	posts: allJournalPost {
+	posts: allProjectPost {
     edges {
       node {
         id

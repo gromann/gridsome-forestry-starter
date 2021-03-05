@@ -13,16 +13,20 @@
     </div>
 </template>
 
-<script>
-export default {
-    props: {
-        journals: {
-            type: Array,
-            required: true
-        }
+<page-query>
+    query Journal {
+    posts: allJournalPost {
+    edges {
+    node {
+    id
+    path
+    title
+    excerpt
     }
-}
-</script>
+    }
+    }
+    }
+</page-query>
 
 <style scoped>
 .latest-journals-heading {

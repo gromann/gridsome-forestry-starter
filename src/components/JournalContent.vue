@@ -1,8 +1,11 @@
 <template>
-    <div 
-        class="journal-content"
+    <div>
+    <div
+        class="content"
         v-html="content"
     />
+    recomended for you
+    </div>
 </template>
 
 <script>
