@@ -1,13 +1,14 @@
 ---
 thumbnail: "/uploads/whatsapp-image-2021-03-04-at-22-44-20.jpeg"
 title: Build Drag&Drop upload components in no time using Dropzone.js
-date: 2019-01-03
+date: 2021-03-08
 categories:
 - vue
 - Components
 - awesome libaries
 project_bg_color: ''
 project_fg_color: "#000000"
+sumary: ''
 
 ---
 
