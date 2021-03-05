@@ -1,139 +1,43 @@
 ---
-thumbnail: "/uploads/whatsapp-image-2021-03-04-at-22-44-20.jpeg"
+thumbnail: "/uploads/sendi-gibran-oals6skzc_s-unsplash.jpg"
 title: Create and manage an Amazon S3 Bucket
 date: 2021-03-08
 categories:
-- vue
-- Components
-- awesome libaries
+- AWS
+- S3
+- Cloud
 project_bg_color: ''
 project_fg_color: "#000000"
-sumary: ''
+sumary: "Photo by [sendi gibran](https://unsplash.com/@sendi_r_gibran?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+  on [Unsplash](https://unsplash.com/s/photos/cloud?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText).
+  \n\nI will talk about how to set up an Amazon S3 Bucket, add a User and control
+  the access rights that no one can do unallowed changes."
 
 ---
-In my first guide, I want to show you how to build a Drag&Drop inside your Vue.js application. This is the first part in the series on how to securely upload your files to an S3 Bucket from vue.Js.
+This is the second part of my Series on how to Upload images on Amazon S3 from a Vue.Js frontend. In the last part, we were focusing on building a drag&drop vue component to upload the files. Now it is all about creating an AWS bucket to store your uploaded files.
 
-For uploading the images we are going to use vue-dropzone, and to make the upload process more secure the images will at first be uploaded to a .net server and from there it will be streamed to your S3 Bucket.
+#### Creating the Amazon S3 Bucket
 
-This will improve the overall security of your application and your AWS account since your sensitive login info is not saved inside your frontend where it could be easily exploited. Instead, it is saved in your backend application where an attacker could not access it.
+First of all, visit the AWS [console](console.aws.amazon.com "aws console") and log in, or sign up if you are new to AWS. 
 
-This article will be split into three sections.
+Up next click on services on the top left and chose S3 under Storage. 
 
-In Section One, I will describe how to set up the UI.
+![](/uploads/createbucket.png "The S3 Bucket overview.")
 
-Section two will all about handling the images inside that backend and forwarding them to your S3 Bucket.
+Inside the S3 page, you can see all your Buckets with their names, region creation date, and most important their visibility, like below. Next click on Create Bucket.
 
-You can skip this if you want to use another server technology.
+![You will be asked for the name and region.](/uploads/createawsbucket.png "Create Aws Bucket")
 
-In the last section, you will learn everything you need to know about creating your S3 Bucket and saving the images to it.
+To ensure the best performance the location should be near to you, when downloading content there could also a CDN used where you are using always the nearest possible location to your users, more on this in part 4 of my series.
 
-# Building the UI
+At next in the security settings chose to block all public settings. If nothing is blocked everyone could access the files inside your bucket. 
 
-The Images are going to be uploaded using dropzone.js, this is an amazing js library providing feature-rich drag&drop functionality with upload status, etc. in no time.
+Next hit create Bucket, now your bucket is created and we can move on creating IAM Users and setting up access policies. 
 
-### Install and setup Dropzone.js
+#### Add IAM User
 
-I will use the vue wrapper of dropzone, called vue-Dropzone [vue-Dropzone](https://rowanwins.github.io/vue-dropzone/docs/dist/#/installation "vue-dropzone").
+Next, navigate to your IAM Management console and click Add user. 
 
-First of all, we are adding dropzone to our project.
+![](/uploads/addiamuser.png)
 
-``` js
-    npm install vue2-dropzone
-```
-
-After the installation, you have full access to the dropzone.js functionality documented under: and it could be imported like any other vue-component.
-
-Next, we will set up the dropzone component, this should look something like this:
-
-If The Image was uploaded successfully, it will be displayed like on the left, with the image name on Huver.
-
-Since we do not allow duplicated images on our S3 Bucket, adding the same Image twice will lead to an error (right), the image will be marked and on hover, the error message will be displayed.
-
-```js
-    <template>
-      <div>
-        {{ label }}
-        <vue-dropzone
-          id="drop1"
-          ref="myVueDropzone"
-          :options="dropOptions"
-          @vdropzone-sending="appendLocation"
-          @vdropzone-success="handleResponse"
-        ></vue-dropzone>
-      </div>
-    </template>
-    
-    <script>
-    import ImageRepository from "../../Repository/ImageRepository";
-    import "vue2-dropzone/dist/vue2Dropzone.min.css";
-    import vueDropzone from "vue2-dropzone";
-    
-    export default {
-      name: "dropZone",
-      components: { vueDropzone },
-      props: {
-        label: {
-          type: String
-        },
-        location: { type: String, required: true }
-      },
-      data() {
-        return {
-          selectedImages: [],
-          files: new FormData(),
-          baseURL: "youApiUrl",
-          dropOptions: {
-            url: baseURL + "yourEndpoint",
-            addRemoveLinks: true,
-            maxFilesize: 3,
-            accept: function(file, done) {
-              console.log(file);
-              if (
-                file.type.toLowerCase() != "image/jpg" &&
-                file.type.toLowerCase() != "image/gif" &&
-                file.type.toLowerCase() != "image/jpeg" &&
-                file.type.toLowerCase() != "image/png"
-              ) {
-                done("Invalid file");
-              } else {
-                done();
-              }
-            },
-            headers: {
-              "Cache-Control": null,
-              "X-Requested-With": null,
-              withCredentials: true
-            }
-          }
-        };
-      },
-      methods: {
-        appendLocation(file, xhr, formData) {
-          formData.append("path", this.location);
-        },
-        handleResponse(file, response) {
-          console.log(response);
-          var Image = {
-            key: response.key,
-            imageId: parseInt(response.id),
-            bucket: this.location
-          };
-          this.selectedImages.push(Image);
-          this.$emit("input", this.selectedImages);
-        },
-      }
-    };
-    </script>
-```
-
-In the above code, we first import the dropzone component and display a label given as a prop above it.
-
-The options passed to the component are defined in the dropOptions object.
-
-With this options set, our component will send a formData Object to the given URL, got remove links to delete uploaded images again. The accept property could be used to define the accepted file types via this filter function, with maxFileSize we are not accepting files bigger than 3MB. The headers are set according to the needs of the API.
-
-You can also intercept Dropzone at different stages and execute additional code. For example, I'm appending the location where the image should be saved to the request, by simply listening to the _@vdropzone-sending_ event. Again you can find the whole list of supported events in the  [dropzone.js documentation](https://www.dropzonejs.com/ "dropzone.js docs").
-
-This was the first part of my series on how to securely upload anything to Amazon S3. In the next part, I'm going to explain how to set up an Amazon S3 Bucket to store the images in.
-
-stream the image through a .net Core 3.1 Api and store a reference of the Image inside it
+Make sure to check programmatic access, you will need the generated keys in section 3.
