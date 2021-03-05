@@ -9,8 +9,6 @@ project_bg_color: ''
 project_fg_color: ''
 
 ---
-![](/uploads/markus-spiske-516263-unsplash.jpg)
-1
 
 In my first guide, I want to show you how to build a Drag&Drop inside your Vue.js application. This is the first part in the series on how to securely upload your files to an S3 Bucket from vue.Js. 
 
