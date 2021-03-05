@@ -36,4 +36,5 @@ fields:
   label: Author
   default: Nichlas W. Andersen
 pages:
+- journal/build-drag-drop-upload-components-in-no-time-using-dropzone.js.md
 - journal/macos-development-environment.md
