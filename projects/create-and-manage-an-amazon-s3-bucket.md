@@ -8,10 +8,8 @@ categories:
 - Cloud
 project_bg_color: ''
 project_fg_color: "#000000"
-sumary: "Photo by [sendi gibran](https://unsplash.com/@sendi_r_gibran?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
-  on [Unsplash](https://unsplash.com/s/photos/cloud?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText).
-  \n\nI will talk about how to set up an Amazon S3 Bucket, add a User and control
-  the access rights that no one can do unallowed changes."
+sumary: 'Everything you need to know about setting up AWS S3 Buckets, adding IAM users
+  for controlled access, and Configuring CORS to provide safe resource sharing. '
 
 ---
 This is the second part of my Series on how to Upload images on Amazon S3 from a Vue.Js frontend. In the last part, we were focusing on building a drag&drop vue component to upload the files. Now it is all about creating an AWS bucket to store your uploaded files.
