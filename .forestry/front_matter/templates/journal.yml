@@ -13,6 +13,12 @@ fields:
   description: Short snippet that will show outside of the actual post
   config:
     required: true
+- name: thumbnail
+  type: file
+  config:
+    maxSize: 64
+  label: Thumbnail
+  description: The main Image of the Blog post
 - type: datetime
   name: date
   label: Date
@@ -32,9 +38,9 @@ fields:
       file: data/authors/nichlas-w-andersen.json
     required: true
     options:
-    - Nichlas W. Andersen
+    - Alexander Grossmann
   label: Author
-  default: Nichlas W. Andersen
+  default: Alexander Grossmann
 pages:
 - journal/build-drag-drop-upload-components-in-no-time-using-dropzone.js.md
 - journal/macos-development-environment.md
