@@ -96,7 +96,9 @@ Bellow is my Configuration:
 ]
 ```
 
-This is everything you have to do to create your S3 Bucket, in the next part of my series we are going to bring life into this bucket by pushing from our .net core 3.1 API to it. 
+This is everything you have to do to create your S3 Bucket. 
+
+In the next part of my series, we are going to bring life into this bucket by pushing from our .net core 3.1 API to it. 
 
 I hope I could help you and save you some time, if you got feedback just contact me in the say hi section. 
 
