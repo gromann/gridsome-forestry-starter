@@ -14,6 +14,8 @@ sumary: 'Everything you need to know about setting up AWS S3 Buckets, adding IAM
 ---
 This is the second part of my Series on how to Upload images on Amazon S3 from a Vue.Js frontend. In the last part, we were focusing on building a drag&drop vue component to upload the files. Now it is all about creating an AWS bucket to store your uploaded files.
 
+Amazon S3 is a cloud storage service from Amazon AWS. When treated right it is fast, secure and with about 0,023 $ per GB, it is also one of the cheapest ways of storing your Data in the Cloud. So let\`s give it a try and start creating a Bucket and upload the first files.
+
 #### Creating the Amazon S3 Bucket
 
 First of all, visit the AWS [console](console.aws.amazon.com "aws console") and log in, or sign up if you are new to AWS.
@@ -94,12 +96,12 @@ Bellow is my Configuration:
 ]
 ```
 
-This is everything you have to do to create your S3 Bucket. 
+This is everything you have to do to create your S3 Bucket. Now you can either directly upload your files, or you can follow my series and start using your own app to upload them.
 
-In the next part of my series, we are going to bring life into this bucket by pushing from our .net core 3.1 API to it. 
+In the next part of my series, we are going to bring life into this bucket by pushing from our .net core 3.1 API to it.
 
-I hope I could help you and save you some time, if you got feedback just contact me in the say hi section. 
+I hope I could help you and save you some time, if you got feedback just contact me in the say hi section.
 
-Happy coding, 
+Happy coding,
 
-Alex. 
+Alex.
