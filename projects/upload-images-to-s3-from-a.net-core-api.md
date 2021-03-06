@@ -21,7 +21,7 @@ Connecting to a third-party service directly from your frontend application isn'
 
 #### Building the Endpoint
 
-Our controller will receive a FormFile and a path to save it to. For me accessing the formData object and extracting the path and file was a pain, it took me hours of trying, so I thought of including it in this guide. 
+Our controller will receive a FormFile and a path to save it to. For me accessing the formData object and extracting the path and file took me a lot of googeling, so I thought of including it in this guide. 
 
 Below you can find the endpoint from my controller, it is just available to authenticated users. I will explain how to do this in another post, so stay tuned!
 
@@ -37,6 +37,8 @@ Below you can find the endpoint from my controller, it is just available to auth
         return FromValueServiceResult(await _imageS3Service.UploadImageToS3(addImageCommand));
     }
 ```
+The Most important thing is to add the FromForm parameter binding to 
+
 In the next part of my series, we are going to bring life into this bucket by pushing from our .net core 3.1 API to it.
 
 I hope I could help you and save you some time, if you got feedback just contact me in the say hi section.
