@@ -7,7 +7,7 @@
         <div class="project-header">
           <h1 class="project-title" v-html="$page.post.title" />
           <div class="project-info">
-
+            <span v-html="$page.post.sumary" class="project-sumary" />
             <div class="categories-container">
               <div class="categories">
                 <span class="label">Categories</span>
@@ -19,14 +19,12 @@
                 />
               </div>
             </div>
-
             <div class="year-container">
               <span class="label">Year</span>
               <div v-html="$page.post.date"/>
             </div>
           </div>
         </div>
-
         <div v-html="$page.post.content" class="content" />
 
       </div>
@@ -41,6 +39,7 @@
 query ProjectPost ($path: String!) {
   post: projectPost (path: $path) {
     title
+    sumary
     date (format: "YYYY")
     content
     categories
@@ -50,16 +49,14 @@ query ProjectPost ($path: String!) {
 
   journals: allProjectPost(perPage: 4) {
   edges {
-  node {
-  id
-  path
-  title
-  excerpt
+    node {
+      id
+      path
+      title
+      excerpt
+      }
+    }
   }
-  }
-  }
-
-
 }
 
 </page-query>
@@ -91,10 +88,15 @@ components:{
   margin: 0 0 4rem 0;
   padding: 0;
 }
+.project-sumary {
+  font-size: 2rem;
+  margin: 0 0 4rem 0;
+  color: rgba(0, 0, 0, 0.64);
+}
 .project-info {
   display: flex;
   flex-wrap: wrap;
-  font-size: 0.8rem;
+  font-size: 1.15rem;
 }
 .project-info > div {
   margin-right: 4rem;
@@ -108,17 +110,20 @@ components:{
 .category:last-of-type:after {
   content: '';
 }
+.content {
+  font-size: 1.4rem;
+}
 p {
   line-height: 1.5;
-  font-size: 1.15rem;
-}
-h2 {
-  font-size: 2rem;
-}
-h3 {
   font-size: 1.5rem;
 }
+h2 {
+  font-size: 2.25rem;
+}
+h3 {
+  font-size: 2rem;
+}
 h4, h5, h6 {
-  font-size: 1.15rem;
+  font-size: 1.3rem;
 }
 </style>
