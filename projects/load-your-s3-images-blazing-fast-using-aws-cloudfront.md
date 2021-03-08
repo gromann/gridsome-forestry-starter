@@ -24,7 +24,13 @@ Once the files are uploaded the next requirement is to access them. There are se
 
 The next option would be using the S3 JS Libary to generate signedURLs and access the images in that way, this is verry safe but verry slow and you would need IAM user credidentials on your client side. Another way is uning presigned URLs, this is a safe and faster way. Even faster is accessing your images through Amazon CoundFront.
 
-Amazon CloudFront is a fast content delivery network (CDN), made to serve your content in a fast and secure way from all over the world. This keeps your latency low and your users safe. The best thing about it is, it is amazingly cheap, 10 TB data out per month will cost you about 0.085 €
+Amazon CloudFront is a fast content delivery network (CDN), made to serve your content in a fast and secure way from all over the world. This keeps your latency low and your users safe. The best thing about it is, it is amazingly cheap, 10 TB data out per month will cost you about 0.085 € So lets dive into it!
+
+#### Setting up CloudFront
+
+Go to your aws console and chose [cloudFront](https://console.aws.amazon.com/cloudfront/), then you will see a list of your Distribution. A Distribution is a set up CDN. The two Interesting columns for you would be the **Domain Name** and the origin. The **Origin** is the service CloudFront is forwarding, so this should be your S3 Bucket when we are done. 
+
+The other important column for you is the **Domain Name**, this is the URL from where you can access youre images. Your final image URL then is _Domain Name + location + filename._
 
 #### Installing Nuget Packages
 
