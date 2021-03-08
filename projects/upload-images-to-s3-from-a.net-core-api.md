@@ -106,9 +106,21 @@ Now we need to connect to the S3 Bucket, for this you will need your saved credi
 
 #### Sreaming the files to Amazon S3
 
-When we have created our client we can now stream the file to Amsazon S3, the other options would be either creating an resigned URL or storing the file, process it and then transfer it to S3.
+When we have created our client we can now stream the file to Amsazon S3, the other options would be either creating an pre-signed URL or storing the file, process it and then transfer it to S3.
 
-In the next part of my series, we are going to bring life into this bucket by pushing from our .net core 3.1 API to it.
+So to stream the file a file stream will be opened, writing into the fileBytes Object. In line 22 this Object will be used to create an memoryStream. Inside that stream a PutObject will be created. A putObject is used to add an Object to an S3 Bucket, it consists of the file, the location and the Bucket name.  To be submitted you must have write permissions on this Bucket. And with the configuration from part 2, you must not specify an ACL inside this object, otherwise it will lead to an unauthorized error.
+
+When everything is set up PutObjectAsync will be called, the file will be saved to S3 and an response will be returned. 
+
+When everything was fine I will safe an reserence to the image in my own database you can do whatever you're supposed to do here. 
+
+#### Conclusion
+
+Submitting Images from .net Core is really an easy job todo if you follow along above steps. The major task here is to find out whats wrong when you run into security problems when trying it for the first time. Like I was searching for hours why I am getting 401 errors, it ture´ned out that I had set the ACL modifier which lead to nowhere in my config.
+
+If everything is set up correctly you should be done in no time, so lets get started!
+
+In the next part of my series, i will show you how to access those images in a fast way.
 
 I hope I could help you and save you some time, if you got feedback just contact me in the say hi section.
 
