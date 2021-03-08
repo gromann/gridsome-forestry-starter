@@ -1,7 +1,7 @@
 ---
 thumbnail: "/uploads/sendi-gibran-oals6skzc_s-unsplash.jpg"
 title: Upload Images to S3 from a .net core API
-date: 2021-03-08
+date: 2021-03-11
 categories:
 - AWS
 - S3
@@ -16,7 +16,7 @@ sumary: 'In this guide, I want to show you how to process formData objects in .n
   your API on your S3 Bucket. '
 
 ---
-This is the third part of my Series on how to Upload images on Amazon S3 from a Vue.Js frontend. In the last part, we were focusing on creating an S3 Bucket and enabling it just for private access. You can find it here if you missed it.
+This is the third part of my series on how to Upload images on Amazon S3 from a Vue.Js frontend. In the last part, we were focusing on creating an S3 Bucket and enabling it just for private access. You can find it here if you missed it.
 
 Connecting to a third-party service directly from your frontend application isn't a good idea, because theoretically anyone could access your credentials. Using your API as a middleman is a good way to go, so let's get started!
 
@@ -38,11 +38,11 @@ Below you can find the endpoint from my controller, it is just available to auth
     }
 ```
 
-The most important thing is to add the FromForm parameter binding to **every** parameter! 
+The most important thing is to add the FromForm parameter binding to **every** parameter! At next I create an AddImageCommand, this is just a transport class to pass the parameters to my Service. Then the service will be async called. Afterwards a wrapper with that result plus status code or error message will be returned.
 
 #### Connecting to Amazon S3
 
-Next inside the service make sure to have your access key, access secret, and bucket name accessible. I would recommend saving those in .nets [Secret Manager](https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetcore-5.0&tabs=windows "microsoft documentation of secret Manager"), but you can also save them in some Config files. 
+Next inside the service make sure to have your access key, access secret, and bucket name accessible. I would recommend saving those in .net's [Secret Manager](https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetcore-5.0&tabs=windows "microsoft documentation of secret Manager"), but you can also save them in some Config files. 
 
     public async Task<ServiceResult<ImageDto>> UploadImageToS3(AddImageCommand command)
             {
@@ -100,15 +100,15 @@ Next inside the service make sure to have your access key, access secret, and bu
                 return imageDto;
             }
 
-The first step is to check if the files content type is one of the types you are accepting, images for m case but it could be anything else. 
+The first step is to check if the files content type is one of the types you are accepting, images for my case but it could be anything else. 
 
-Now we need to connect to the S3 Bucket, for this you will need your saved credidentials and your Bucket loation. 
+Now we need to connect to the S3 Buckety by creating an new S3 Client. The Client takes your credentials as well as your Bucket location. You can lookup this in the region column on your S3 Overview. Then just type _Amazon.RegionEndpoint._ and just use autocomplete of your IDE to find the right region. Alternativly you can find It [here](https://docs.aws.amazon.com/sdkfornet/v3/apidocs/items/Amazon/TRegionEndpoint.html "AWS Regions class"). 
 
 #### Sreaming the files to Amazon S3
 
-When we have created our client we can now stream the file to Amsazon S3, the other options would be either creating an pre-signed URL or storing the file, process it and then transfer it to S3.
+When we have created our client we can now stream the file to Amsazon S3. Alternativley you could either create an pre-signed URL or store the file, process it and then transfer it to S3.
 
-So to stream the file a file stream will be opened, writing into the fileBytes Object. In line 22 this Object will be used to create an memoryStream. Inside that stream a PutObject will be created. A putObject is used to add an Object to an S3 Bucket, it consists of the file, the location and the Bucket name.  To be submitted you must have write permissions on this Bucket. And with the configuration from part 2, you must not specify an ACL inside this object, otherwise it will lead to an unauthorized error.
+To stream the file a new file stream will be opened, writing into the fileBytes Object. In line 22 this Object will be used to create an memoryStream. Inside that stream a PutObject will be created. A putObject is used to add an Object to an S3 Bucket, it consists of the file, the location and the Bucket name.  To be submitted you must have write permissions on this Bucket. And with the configuration from part 2, you must not specify an ACL inside this object, otherwise it will lead to an unauthorized error.
 
 When everything is set up PutObjectAsync will be called, the file will be saved to S3 and an response will be returned. 
 
