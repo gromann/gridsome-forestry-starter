@@ -1,6 +1,6 @@
 ---
 thumbnail: "/uploads/sendi-gibran-oals6skzc_s-unsplash.jpg"
-title: Load your S3 Images blazing fast using AWS CloudFront
+title: Load your S3 Files blazing fast using AWS CloudFront
 date: 2021-03-11
 categories:
 - AWS
@@ -16,9 +16,15 @@ sumary: 'In this guide, I want to show you how to process formData objects in .n
   your API on your S3 Bucket. '
 
 ---
-This is the third part of my series on how to Upload images on Amazon S3 from a Vue.Js frontend. In the last part, we were focusing on creating an S3 Bucket and enabling it just for private access. You can find it here if you missed it.
+This is the last part of my series on how to Upload images on Amazon S3 from a Vue.Js frontend. In the last part, we have uploaded our Images from a .net core API. You can find it here if you missed it.
 
-Connecting to a third-party service directly from your frontend application isn't a good idea, because theoretically anyone could access your credentials. Using your API as a middleman is a good way to go, so let's get started!
+Once the files are uploaded the next requirement is to access them. There are several ways to access your files from an S3 bucket. You could either set everything to the public, which I do not recommend as you may already know, and access them directly with your buckeu URL + location + key. But
+
+![](/uploads/50usnq.jpg)
+
+The next option would be using the S3 JS Libary to generate signedURLs and access the images in that way, this is verry safe but verry slow and you would need IAM user credidentials on your client side. Another way is uning presigned URLs, this is a safe and faster way. Even faster is accessing your images through Amazon CoundFront.
+
+Amazon CloudFront is a fast content delivery network (CDN), made to serve your content in a fast and secure way from all over the world. This keeps your latency low and your users safe. The best thing about it is, it is amazingly cheap, 10 TB data out per month will cost you about 0.085 €
 
 #### Installing Nuget Packages
 
@@ -49,7 +55,7 @@ The most important thing is to add the FromForm parameter binding to **every** p
 
 #### Connecting to Amazon S3
 
-Next inside the service make sure to have your access key, access secret, and bucket name accessible. I would recommend saving those in .net's [Secret Manager](https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetcore-5.0&tabs=windows "microsoft documentation of secret Manager"), but you can also save them in some Config files. 
+Next inside the service make sure to have your access key, access secret, and bucket name accessible. I would recommend saving those in .net's [Secret Manager](https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetcore-5.0&tabs=windows "microsoft documentation of secret Manager"), but you can also save them in some Config files.
 
     public async Task<ServiceResult<ImageDto>> UploadImageToS3(AddImageCommand command)
             {
@@ -107,9 +113,9 @@ Next inside the service make sure to have your access key, access secret, and bu
                 return imageDto;
             }
 
-The first step is to check if the files content type is one of the types you are accepting, images for my case but it could be anything else. 
+The first step is to check if the files content type is one of the types you are accepting, images for my case but it could be anything else.
 
-Now we need to connect to the S3 Buckety by creating an new S3 Client. The Client takes your credentials as well as your Bucket location. You can lookup this in the region column on your S3 Overview. Then just type _Amazon.RegionEndpoint._ and just use autocomplete of your IDE to find the right region. Alternativly you can find It [here](https://docs.aws.amazon.com/sdkfornet/v3/apidocs/items/Amazon/TRegionEndpoint.html "AWS Regions class"). 
+Now we need to connect to the S3 Buckety by creating an new S3 Client. The Client takes your credentials as well as your Bucket location. You can lookup this in the region column on your S3 Overview. Then just type _Amazon.RegionEndpoint._ and just use autocomplete of your IDE to find the right region. Alternativly you can find It [here](https://docs.aws.amazon.com/sdkfornet/v3/apidocs/items/Amazon/TRegionEndpoint.html "AWS Regions class").
 
 #### Sreaming the files to Amazon S3
 
@@ -117,9 +123,9 @@ When we have created our client we can now stream the file to Amsazon S3. Altern
 
 To stream the file a new file stream will be opened, writing into the fileBytes Object. In line 22 this Object will be used to create an memoryStream. Inside that stream a PutObject will be created. A putObject is used to add an Object to an S3 Bucket, it consists of the file, the location and the Bucket name.  To be submitted you must have write permissions on this Bucket. And with the configuration from part 2, you must not specify an ACL inside this object, otherwise it will lead to an unauthorized error.
 
-When everything is set up PutObjectAsync will be called, the file will be saved to S3 and an response will be returned. 
+When everything is set up PutObjectAsync will be called, the file will be saved to S3 and an response will be returned.
 
-When everything was fine I will safe an reserence to the image in my own database you can do whatever you're supposed to do here. 
+When everything was fine I will safe an reserence to the image in my own database you can do whatever you're supposed to do here.
 
 #### Conclusion
 
