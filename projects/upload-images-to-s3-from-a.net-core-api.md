@@ -20,6 +20,13 @@ This is the third part of my series on how to Upload images on Amazon S3 from a 
 
 Connecting to a third-party service directly from your frontend application isn't a good idea, because theoretically anyone could access your credentials. Using your API as a middleman is a good way to go, so let's get started!
 
+#### Installing Nuget Packages
+
+For this task you need following Packages
+
+* AWSSDK.Core
+* AWSSDK.S3
+
 #### Building the Endpoint
 
 Our controller will receive a FormFile and a path to save it to. For me accessing the formData object and extracting the path and file took me a lot of googling, so I thought of including it in this guide.
