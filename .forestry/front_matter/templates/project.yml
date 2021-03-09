@@ -46,7 +46,6 @@ fields:
     color_format: Hex
   label: Foreground color
 pages:
-- projects/chelsea-landmark.md
 - projects/create-and-manage-an-amazon-s3-bucket.md
 - projects/deploy-your-vue-project-to-netlify.md
 - projects/ios-concept.md
