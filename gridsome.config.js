@@ -2,13 +2,17 @@
 // Learn more: https://gridsome.org/docs/config
 
 module.exports = {
-  siteName: "Portfolio",
-  siteUrl: `https://www.itsnwa.com`,
+  siteName: "the koi",
+  siteUrl: `https://www.the-koi.com`,
   host: "0.0.0.0",
-  titleTemplate: "%s - NWA",
+  titleTemplate: "the koi",
   siteDescription: "Creative technologist",
   plugins: [
     {
+      use: '@gridsome/plugin-google-analytics',
+      options: {
+        id: 'UA-191213887-1'
+      },
       use: "@gridsome/source-filesystem",
       options: {
         path: "projects/**/*.md",
