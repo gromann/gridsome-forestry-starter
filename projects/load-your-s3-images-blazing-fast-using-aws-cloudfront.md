@@ -1,5 +1,5 @@
 ---
-thumbnail: "/uploads/sendi-gibran-oals6skzc_s-unsplash.jpg"
+thumbnail: "/uploads/datei_000.jpeg"
 title: Load your S3 Files blazing fast using AWS CloudFront
 date: 2021-03-11
 categories:
@@ -26,122 +26,51 @@ The next option would be using the S3 JS Libary to generate signedURLs and acces
 
 Amazon CloudFront is a fast content delivery network (CDN), made to serve your content in a fast and secure way from all over the world. This keeps your latency low and your users safe. The best thing about it is, it is amazingly cheap, 10 TB data out per month will cost you about 0.085 € So lets dive into it!
 
-#### Setting up CloudFront
+#### Setting up a CloudFront Distribution
 
 Go to your aws console and chose [cloudFront](https://console.aws.amazon.com/cloudfront/), then you will see a list of your Distribution. A Distribution is a set up CDN. The two Interesting columns for you would be the **Domain Name** and the origin. The **Origin** is the service CloudFront is forwarding, so this should be your S3 Bucket when we are done. 
 
 The other important column for you is the **Domain Name**, this is the URL from where you can access youre images. Your final image URL then is _Domain Name + location + filename._
 
-#### Installing Nuget Packages
+To set up a new Distribution click on **Create Distribution**, chose **Web** as delevery method and click **Get Started.**
 
-For this task you need following Packages
+Origin Domain Name is your S3 Bucket created in Part 2, optionally you could also specify a path, this would be an folder inside your Bucket. Default cloudFront is accessing the home directory of your Bucket. 
 
-* AWSSDK.Core
-* AWSSDK.S3
+Select **restrict Bucket access**, **Create new Identity** and **Yes, Update Bucket Policy**. Then AWS will handle everything to make shure ther are just Authenticated requests allowed to S3 and CloudFront is the only endpoint to get your files from. 
 
-#### Building the Endpoint
+To further improve security chose HTTPS Only, this leads to an set HSTS Header and drops all http headders. Also allow only Get, Head and Options. Chose restrict viewer access No, we well do that in one of my next Articles.
 
-Our controller will receive a FormFile and a path to save it to. For me accessing the formData object and extracting the path and file took me a lot of googling, so I thought of including it in this guide.
+The rest you can set according to your personal preferences. I would also recomend logging, therefore you can just chose an Bucket for your logs and an file prefix to easily find them. 
 
-Below you can find the endpoint from my controller, it is just available to authenticated users. I will explain how to do this in another post, so stay tuned!
+Bellow you can see my exampe Configuration:
 
-```cs
-    [HttpPost]
-    [DisableRequestSizeLimit]
-    [Authorize(Policy = "Admin")]
-    public async Task<ActionResult<ImageDto>> Post([FromForm] IFormFile File, [FromForm] string Path)
-    {
-        AddImageCommand addImageCommand = new AddImageCommand { File = File, Bucket = Path };
-    
-        return FromValueServiceResult(await _imageS3Service.UploadImageToS3(addImageCommand));
-    }
-```
+![](/uploads/screencapture-console-aws-amazon-cloudfront-home-2021-03-09-11_32_08.png)
 
-The most important thing is to add the FromForm parameter binding to **every** parameter! At next I create an AddImageCommand, this is just a transport class to pass the parameters to my Service. Then the service will be async called. Afterwards a wrapper with that result plus status code or error message will be returned.
+After submitting your Distribution is goind to be created. You can go Back to the Overview and check the Status, after successfull creation it should switch to deployed. 
 
-#### Connecting to Amazon S3
+![](/uploads/clofro-ov.png)
 
-Next inside the service make sure to have your access key, access secret, and bucket name accessible. I would recommend saving those in .net's [Secret Manager](https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetcore-5.0&tabs=windows "microsoft documentation of secret Manager"), but you can also save them in some Config files.
+Then we can verify that the distribution works as expected.
 
-    public async Task<ServiceResult<ImageDto>> UploadImageToS3(AddImageCommand command)
-            {
-                ServiceResult<ImageDto> imageDto;
-                IFormFile file = command.File;
-    			// check for the right content type
-                if (!file.ContentType.Contains("image"))
-                {
-                    return ServiceResult.InvalidEntity<ImageDto>("Only Images are accepted!");
-                }
-    
-                // connecting to the client
-                var client = new AmazonS3Client(accessKey, accessSecret, Amazon.RegionEndpoint.EUCentral1);
-    
-                // get the file and convert it to the byte[]
-                byte[] fileBytes = new Byte[file.Length];
-                file.OpenReadStream().Read(fileBytes, 0, Int32.Parse(file.Length.ToString()));
-    
-                var fileName = file.FileName;
-                var bucketName = bucket + command.Bucket;
-                PutObjectResponse response = null;
-    
-                using (var stream = new MemoryStream(fileBytes))
-                {
-                    var request = new PutObjectRequest
-                    {
-                        BucketName = bucketName,
-                        Key = fileName,
-                        InputStream = stream,
-                        ContentType = file.ContentType
-                    };
-                    // specify no ACL, else upload will be blocked by S3!
-                    response = await client.PutObjectAsync(request);
-                }
-    ;
-    
-                if (response.HttpStatusCode == System.Net.HttpStatusCode.OK)
-                {
-                    // this model is up to you, i have saved a reference to my database 
-                    // to connect the images with users etc.
-                    AddImageReferenceCommand addImageReferenceCommand = new AddImageReferenceCommand
-                    {
-                        Bucket = command.Bucket,
-                        Key = fileName,
-                        Name = fileName
-                    };
-                    // adds the image reference
-                    imageDto = await _imageService.AddImage(addImageReferenceCommand);
-                }
-                else
-                {
-                // do some error handling
-                }
-    
-                return imageDto;
-            }
+#### Acess the Uploaded image through Distribution
 
-The first step is to check if the files content type is one of the types you are accepting, images for my case but it could be anything else.
+I've uploaded the title image of this article to S3, to check if everything works fine we now need to build the URL to this image with the file name: Datei_000.jpeg. 
 
-Now we need to connect to the S3 Buckety by creating an new S3 Client. The Client takes your credentials as well as your Bucket location. You can lookup this in the region column on your S3 Overview. Then just type _Amazon.RegionEndpoint._ and just use autocomplete of your IDE to find the right region. Alternativly you can find It [here](https://docs.aws.amazon.com/sdkfornet/v3/apidocs/items/Amazon/TRegionEndpoint.html "AWS Regions class").
+To Access your image you now need to build your URL: 
 
-#### Sreaming the files to Amazon S3
+https://<your Distribution>/<optionally a folder>/<your file>
 
-When we have created our client we can now stream the file to Amsazon S3. Alternativley you could either create an pre-signed URL or store the file, process it and then transfer it to S3.
+This would be for my Image:
 
-To stream the file a new file stream will be opened, writing into the fileBytes Object. In line 22 this Object will be used to create an memoryStream. Inside that stream a PutObject will be created. A putObject is used to add an Object to an S3 Bucket, it consists of the file, the location and the Bucket name.  To be submitted you must have write permissions on this Bucket. And with the configuration from part 2, you must not specify an ACL inside this object, otherwise it will lead to an unauthorized error.
+https://d152puo1m6akm.cloudfront.net/Datei_000.jpeg
 
-When everything is set up PutObjectAsync will be called, the file will be saved to S3 and an response will be returned.
-
-When everything was fine I will safe an reserence to the image in my own database you can do whatever you're supposed to do here.
+If you access is only with http you will recieve an 403 error since http is not allowed. 
 
 #### Conclusion
 
-Submitting Images from .net Core is really an easy job todo if you follow along above steps. The major task here is to find out whats wrong when you run into security problems when trying it for the first time. Like I was searching for hours why I am getting 401 errors, it ture´ned out that I had set the ACL modifier which lead to nowhere in my config.
+Accessing your images via CloudFront is an easy way to improve the loading performance of your project since it is faster than accessing S3 directly. Moreover it is a good way to improve the security since you can force using https and restricting to different headers way easier than directly in S3.
 
-If everything is set up correctly you should be done in no time, so lets get started!
-
-In the next part of my series, i will show you how to access those images in a fast way.
-
-I hope I could help you and save you some time, if you got feedback just contact me in the say hi section.
+This was the last part of my S3 series, i hope i could help you, and let me know in the say Hi section how you've liked it or if you were facing any difficulties durring this article. Im looking forward to your feedback.
 
 Happy coding,
 
