@@ -1,5 +1,6 @@
 <template>
     <footer class="footer">
+        <cookie-law theme="dark-lime"></cookie-law>
         <div class="container">
             <span v-html="settings.footer" />
         </div>
@@ -7,8 +8,11 @@
 </template>
 
 <script>
-export default {
-    data() {
+    import CookieLaw from 'vue-cookie-law'
+
+    export default {
+        components: { CookieLaw },
+        data() {
         return {
             settings: require("../../data/theme.json")
         }
