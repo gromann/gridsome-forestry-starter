@@ -5,7 +5,7 @@ module.exports = {
   siteName: "the koi",
   siteUrl: `https://www.the-koi.com`,
   host: "0.0.0.0",
-  titleTemplate: "the koi",
+  titleTemplate: "The Koi",
   siteDescription: "Creative technologist",
   plugins: [
     {
