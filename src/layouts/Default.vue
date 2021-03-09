@@ -5,9 +5,6 @@
     <Footer />
   </div>
 </template>
-<!--google adsense-->
-<script data-ad-client="ca-pub-8164918311331640" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js">
-</script>
 
 <script>
 import Header from "@/components/Header"
