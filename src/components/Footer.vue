@@ -34,7 +34,7 @@
                         this.$ga.enable()
                     } else {
                         // if user consent is false
-                        this.$ga.disable()
+                        // this.$ga.disable()
                     }
                 }
             }

@@ -67,10 +67,50 @@ module.exports = {
               '_gat'
             ],
             required: false,
-            optOut: false,
+            optOut: true,
             onlyOnce: false
           }
         ]
+      }
+    },
+    {
+      use: 'gridsome-plugin-robots-txt',
+      options: {
+        host: 'https://the-koi.com',
+        sitemap: 'https://the-koi.com/sitemap.xml',
+        policy: [
+          {
+            userAgent: "Googlebot",
+            allow: "/",
+            disallow: "/search",
+            crawlDelay: 2
+          },
+          {
+            userAgent: "*",
+            allow: "/",
+            disallow: "/search",
+            crawlDelay: 10,
+            cleanParam: "ref /articles/"
+          }
+        ]
+      }
+    } ,
+    {
+      use: '@gridsome/plugin-sitemap',
+      options: {
+        exclude: ['/exclude-me'],
+        config: {
+          '/projects/*': {
+            changefreq: 'weekly',
+            priority: 0.7,
+            lastmod: '2021-03-10',
+          },
+          '/contact': {
+            changefreq: 'monthly',
+            priority: 0.4,
+            lastmod: '2021-03-09',
+          }
+        }
       }
     }
   ],
