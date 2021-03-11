@@ -35,6 +35,12 @@ export default function(Vue, { head }) {
       { property: "og:site_name", content: config.siteName }
   );
 
+    head.script.push({
+        src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js',
+        async: true,
+        dataAdClient: "ca-pub-8164918311331640"
+    })
+
   Vue.use(require('vue-script2'));
 
   Vue.use(Ads.Adsense);
