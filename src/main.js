@@ -1,6 +1,7 @@
 import DefaultLayout from "~/layouts/Default.vue";
 import settings from "../data/theme.json";
 import config from '../gridsome.config'
+import Ads from 'vue-google-adsense'
 
 
 import "@/assets/code-highlight.css"
@@ -34,6 +35,11 @@ export default function(Vue, { head }) {
       { property: "og:site_name", content: config.siteName }
   );
 
+  Vue.use(require('vue-script2'));
+
+  Vue.use(Ads.Adsense);
+  Vue.use(Ads.InArticleAdsense);
+  Vue.use(Ads.InFeedAdsense);
 
   Vue.component("Layout", DefaultLayout);
   head.bodyAttrs = {

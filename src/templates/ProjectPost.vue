@@ -25,6 +25,12 @@
             </div>
           </div>
         </div>
+        <InArticleAdsense
+                data-ad-client="ca-pub-8164918311331640"
+                >
+        </InArticleAdsense>
+        <div id="adsgoeshere" style="background: #1d1f29; padding-top:60px; text-align: center;" v-html="adsenseContent"></div>
+
         <div v-html="$page.post.content" class="content" />
 
       </div>
@@ -65,9 +71,17 @@ query ProjectPost ($path: String!) {
   import LatestJournals from "@/components/LatestJournals"
 
   export default {
+    data () {
+      return{
+        adsenseContent: ''
+      }
+    },
 components:{
   LatestJournals
 },
+    mounted () {
+      this.adsenseContent = document.getElementById('divadsensedisplaynone').innerHTML
+    },
   metaInfo () {
     return {
       title: this.$page.post.title,
