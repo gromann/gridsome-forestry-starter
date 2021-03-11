@@ -3,12 +3,9 @@ thumbnail: "/uploads/datei_000.jpeg"
 title: How to send mails from .net Core API in 2021
 date: 2021-03-11
 categories:
-- AWS
-- S3
-- Cloud
 - ".net"
-- Backend Development
-- Amazon
+- Backend-Development
+- MailKit
 project_bg_color: ''
 project_fg_color: "#000000"
 sumary: 'In this post, I want to provide you a simple guide on how to send mails from
@@ -53,7 +50,7 @@ To create a client you need to provide your SMTP server address and port.
 
 Next, you need to tell your username (could be your mail address or not, depends on your mail server provider), and password.
 
-_When using Gmail, you will have to set an App Password for your account, otherwise, your request will be rejected and you will receive:_ 
+_When using Gmail, you will have to set an_ [_App Password_](https://support.google.com/accounts/answer/185833) _for your account, otherwise, your request will be rejected and you will receive:_ 
 
     MailKit.Security.AuthenticationException: 535: 5.7.8 Username and Password not accepted. Learn more at
     5.7.8  https://support.google.com/mail/?p=BadCredentials g26sm1148794ejz.70 - gsmtp
