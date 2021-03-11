@@ -4,15 +4,11 @@
 module.exports = {
   siteName: "the koi",
   siteUrl: `https://www.the-koi.com`,
-  host: "0.0.0.0",
-  titleTemplate: "The Koi",
-  siteDescription: "Creative technologist",
+  titleTemplate: `%s | The Koi`,
+  siteDescription: "Software development, buissiness and personal groth blog",
+  author: "Alexander Grossmann",
   plugins: [
     {
-      use: '@gridsome/plugin-google-analytics',
-      options: {
-        id: 'UA-191213887-1'
-      },
       use: "@gridsome/source-filesystem",
       options: {
         path: "projects/**/*.md",
@@ -90,7 +86,12 @@ module.exports = {
           }
         }
       }
-    }
+    },
+    {
+      use: '@gridsome/plugin-google-analytics',
+      options: {
+        id: 'UA-191213887-1'
+      },}
   ],
   transformers: {
     remark: {

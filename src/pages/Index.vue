@@ -44,6 +44,9 @@ export default {
     Hero,
     ProjectsGrid,
     LatestJournals
+  },
+  metaInfo: {
+    title: "Home",
   }
 }
 </script>
