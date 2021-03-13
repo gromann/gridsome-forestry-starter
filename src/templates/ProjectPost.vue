@@ -32,7 +32,7 @@
         <div id="adsgoeshere" style="background: #1d1f29; padding-top:60px; text-align: center;" v-html="adsenseContent"></div>
 
         <div v-html="$page.post.content" class="content" />
-
+        <div id="BMC-Widget" ref="BMC-Widget">bmc</div>
       </div>
     </div>
 <!--    related section -->
@@ -80,8 +80,22 @@ components:{
   LatestJournals
 },
     mounted () {
-      this.adsenseContent = document.getElementById('divadsensedisplaynone').innerHTML
+      // this.adsenseContent = document.getElementById('divadsensedisplaynone').innerHTML
+
+      let externalScript = document.createElement('script')
+      externalScript.setAttribute('src', 'https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js')
+      externalScript.setAttribute('data-name', 'BMC-Widget')
+      externalScript.setAttribute('data-id', 'thekoi')
+      externalScript.setAttribute('data-description', 'Support me on Buy me a coffee!')
+      externalScript.setAttribute('data-message', 'Hey 👋 I hope I could save you some time. If you find my articles useful and want to support me you could buy me a coffee.')
+      externalScript.setAttribute('data-color', '#79D6B5')
+      externalScript.setAttribute('data-position', 'Right')
+      externalScript.setAttribute('data-x_margin', '18')
+      externalScript.setAttribute('data-y_margin', '18')
+      document.head.appendChild(externalScript)
+
     },
+
   metaInfo () {
     return {
       title: this.$page.post.title,

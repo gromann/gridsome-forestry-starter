@@ -13,6 +13,8 @@
     "@gridsome/source-filesystem": "^0.6.2",
     "@gridsome/transformer-remark": "^0.6.4",
     "gridsome": "^0.7.23",
-    "klaro-gridsome": "^1.0.3"
+    "klaro-gridsome": "^1.0.3",
+    "vue-google-adsense": "^1.9.2",
+    "vue-script2": "^2.1.0"
   }
 }

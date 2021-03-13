@@ -14,6 +14,7 @@
             <nav class="nav right">
                 <g-link class="nav__link" to="/journal">All Posts</g-link>
                 <g-link class="nav__link" to="/contact">Say Hi!</g-link>
+                <a class="nav__link" href="https://www.buymeacoffee.com/thekoi">Support me</a>
             </nav>
         </div>
     </header>
