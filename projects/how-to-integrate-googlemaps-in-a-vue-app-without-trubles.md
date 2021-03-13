@@ -1,6 +1,6 @@
 ---
 thumbnail: "/uploads/datei_000.jpeg"
-title: How to integrate GoogleMaps in a vue app without trubles
+title: How to integrate GoogleMaps in a vue app without trubles.
 date: 2021-03-11
 categories:
 - Cloud
@@ -12,57 +12,125 @@ categories:
 - devHack
 project_bg_color: ''
 project_fg_color: "#000000"
-sumary: 'In this guide, I want to show you how to save nerves and cost when deploying
-  a vue.js Application.  We will set up continuous integration to deploy your vue.Js
-  app to netlify. I will go through the main interface, set up a custom domain, and
-  secure everything with HTTPS. '
+sumary: I will show you a quick and easy way on how to integrate GoogleMaps into your
+  vue.js app.
 
 ---
-In this Post i will guide you through the steps i took when deploying an project to Netlify.
+GoogleMaps is awesome, but the GoogleMaps API is even more Awesome. You can not only show places or calculate routes but you're also able to draw on the map, measure distances and even use heatmaps for data visualization.
 
-Netlify is similar to AWS another cloud service, they offer a huge free plan with up to 100GB/month of traffic. Moreover, I love them for their great user experience when it comes to deployment compared to AWS and Microsoft azure. Bellow, I will describe all the steps it takes to get your app up and running.
+Let´s get started by creating an API Key.
 
-Af first sign in Using your Github account, then you will come to your home Page, I will describe their elements later.
+#### Creating an API key
 
-#### Set up a Github CI
+GoogleMaps is not a free service, so before you can get access to it, you have to sign up for an API Key.
 
-![](/uploads/startci.png)
+For this go to the [google cloud developer console](https://console.cloud.google.com/apis/credentials) create an account and a project if you don't have it already, and then go to **APIs** and **Credentials**. From there, under **create credentials**, you can create new API Keys to use in your apps. Next you add permissions to your keys.
 
-From the home menu click on create a new site and chose GitHub, authorize netlify to your GitHub account, and then chose either all repositories or just one, as I did on the left to install netlify.
+For this navigate to [**libary**](https://console.cloud.google.com/apis/library), and chose all the libraries you want to get access to.
 
-In the next step choose the repository you want to build your site from.
+![](/uploads/maps-lib.png)
 
-In step 3 you need to specify your build settings, this highly depends on your application. When you are using **gridsome** your Build command is **gridsome Build** and the publish directory is dist.
+Just make sure to check the prices before selecting one of those.
 
-When using **nuxt** it would be **nuxt Build**, the directory stays the same, and with **plain vue** it stays **npm run build.** Finding these commands for every other framework is also no rocket science and is normally described in the framework's documentation.
+Then you also have to set up billing for your account and you are ready to move on.
 
-![](/uploads/screencapture-app-netlify-start-repos-gromann-the-koi-2021-03-09-14_18_27.png)
+#### Integrating Google maps in vue
 
-...And that's it! Hit **Deploy site** and netlify is doing the rest for you! Just wait a few minutes and your site is up and running. Awesome right?
+I have tried several ways, starting from this [vue](https://vuejs.org/v2/cookbook/practical-use-of-scoped-slots.html) tutorial, where I got a Nuxt error. To the v[ue2-google-maps](https://github.com/xkjyeah/vue-google-maps) library, where I found out that using the Maps APIs is really a pain. So I started to try to implement the vanilla js way into vue, after some problems later on I found a really nice [npm](https://www.npmjs.com/package/google-maps) package that handles all the stuff for me. The Google maps loader handles all the connection stuff for you and makes sure everything is set up!
 
-#### Register a domain
+Now the only task is loading google maps where it should load and define additional libaries. I've done this below.
 
-When the Upload is done you can proceed with registring a domain for your Project. You could either use a third party service like amazon Route 53, which is a little cheaper from the second year on. Or use netlifys service and simply register it there and they handle all the DNS pain for you.
+```js
+<template>
+  <v-container fluid>
+    <div id="map"></div>
+  </v-container>
+</template>
 
-![](/uploads/register-domain.png)
+<script>
+import { Loader, LoaderOptions } from "google-maps";
+const options = { libraries: ["drawing"] };
+const loader = new Loader("yourKeyHere", options);
 
-I have registered my domain directly within netlify, to complete I just hat to submit my payment information and confirm my purchase. After a few seconds, [https://www.the-koi.com/](https://www.the-koi.com/ "https://www.the-koi.com/") was up and running!
+export default {
+  name: "googleMaps",
+  mounted: async function() {
+    const google = await loader.load();
+    const map = new google.maps.Map(document.getElementById("map"), {
+      center: { lat: 47.076668, lng: 15.421371 },
+      zoom: 20
+    });
+  }
+};
+</script>
 
-For your SSL certificate, you just have to click on verify DNS, then everything should be fine and you have a nice Trustful website online!
+<style scoped>
+#map {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 100px;
+  padding-bottom: 10px;
+}
+</style>
+```
 
-Reload after some minutes and your Domain managment tab Should look something like this:
+Above I have imported the loader and the loader options from the npm package.
 
-![](/uploads/screencapture-app-netlify-sites-goofy-nightingale-aa6742-settings-domain-2021-03-09-18_03_08.png)
+Then I create a new Loader instance by passing my API key and my options to the Loader. In the options I have defined a library, I want to use later on.
 
-And that's it! Your Page is online and now you could focus on your SEO and how to get traffic.
+In The mounted, google maps will be loaded and the map will be inserted into the map div from above. The map will get initial coordinates and an initial zoom, which is on house level.
+
+Then I have just added some styling to make the map appear inside my component as I want it to. If you skip this the map might not be visible.
+
+#### Using a Libary
+
+Next, I want to show you how to use libraries within this approach.
+
+You can find all the available libraries and examples on how to use them on Google Developer docs. I want to use the [drawing library](https://developers.google.com/maps/documentation/javascript/drawinglayer) as an example.
+
+```js 
+  mounted: async function() {
+    const google = await loader.load();
+    const map = new google.maps.Map(document.getElementById("map"), {
+      center: { lat: 47.076668, lng: 15.421371 },
+      zoom: 20
+    });
+    // add drawing menu
+    const drawingManager = new google.maps.drawing.DrawingManager({
+      drawingMode: google.maps.drawing.OverlayType.MARKER,
+      drawingControl: true,
+      drawingControlOptions: {
+        position: google.maps.ControlPosition.TOP_CENTER,
+        drawingModes: [
+          google.maps.drawing.OverlayType.POLYGON,
+          google.maps.drawing.OverlayType.POLYLINE,
+          google.maps.drawing.OverlayType.RECTANGLE
+        ]
+      },
+      circleOptions: {
+        fillColor: "#ffff00",
+        fillOpacity: 1,
+        strokeWeight: 5,
+        clickable: false,
+        editable: true,
+        zIndex: 1
+      }
+    });
+    drawingManager.setMap(map);
+  }
+```
+
+Above I have adapted my mounted function in a way that now the drawing library will also be loaded. The drawing controls will be switched on and some will be added to the top center. In the end, you will end up having something like this integrated into your web app:
+
+![](/uploads/result.png)
 
 #### Conclusion
 
-Deploying your code to netlify takes really no time and you end up having a fast and secure server to serve your content.
+Integrating GoogleMaps is an easy task if done right, else it could be a time- and nerve-consuming task. By using the mentioned npm package you will save most of the time and you can focus on using the powerful API you and up with. 
 
-Compared to WordPress you are also running on a budget, your only expenses are 13€ per year for the domain, and that's it!
-
-If you want to know more about netlify or got feedback for this article, just [say hi](https://www.the-koi.com/contact), or buy me a coffee.
+thanks for reading! If you want to know more about GoogleMaps or got problems or feedback for this article, just [say hi](https://www.the-koi.com/contact), or buy me a coffee.
 
 Happy coding,
 
