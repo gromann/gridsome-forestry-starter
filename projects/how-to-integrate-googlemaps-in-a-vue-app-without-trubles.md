@@ -130,7 +130,7 @@ Above I have adapted my mounted function in a way that now the drawing library w
 
 Integrating GoogleMaps is an easy task if done right, else it could be a time- and nerve-consuming task. By using the mentioned npm package you will save most of the time and you can focus on using the powerful API you and up with. 
 
-thanks for reading! If you want to know more about GoogleMaps or got problems or feedback for this article, just [say hi](https://www.the-koi.com/contact), or buy me a coffee.
+thanks for reading! If you want to know more about GoogleMaps or got problems or feedback for this article, just [say hi](https://www.the-koi.com/contact), or [buy me a coffee](https://www.buymeacoffee.com/thekoi).
 
 Happy coding,
 
