@@ -62,6 +62,8 @@ Deploying your code to netlify takes really no time and you end up having a fast
 
 Compared to WordPress you are also running on a budget, your only expenses are 13€ per year for the domain, and that's it!
 
+If you want to know more about netlify or got feedback for this article, just [say hi](https://www.the-koi.com/contact), or buy me a coffee.
+
 Happy coding,
 
 Alex.
