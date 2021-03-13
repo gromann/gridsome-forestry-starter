@@ -134,6 +134,12 @@ With this options set, our component will send a formData Object to the given UR
 
 You can also intercept Dropzone at different stages and execute additional code. For example, I'm appending the location where the image should be saved to the request, by simply listening to the _@vdropzone-sending_ event. Again you can find the whole list of supported events in the  [dropzone.js documentation](https://www.dropzonejs.com/ "dropzone.js docs").
 
-This was the first part of my series on how to securely upload anything to Amazon S3. In the next part, I'm going to explain how to set up an Amazon S3 Bucket to store the images in.
+This was the first part of my series on how to securely upload anything to Amazon S3. In the [next part](https://www.the-koi.com/projects/create-and-manage-an-amazon-s3-bucket/), I'm going to explain [how to set up an Amazon S3 Bucket to store the images in.](https://www.the-koi.com/projects/create-and-manage-an-amazon-s3-bucket/)
 
-stream the image through a .net Core 3.1 Api and store a reference of the Image inside it
+stream the image through a .net Core 3.1 Api and store a reference of the Image inside it.
+
+I hope I could help you and save you some time, if you got feedback just contact me in the say hi section. If I could help you, you can support me by [buying me a coffee](https://www.buymeacoffee.com/thekoi).
+
+Happy coding, 
+
+Alex

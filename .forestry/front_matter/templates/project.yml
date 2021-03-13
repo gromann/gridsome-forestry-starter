@@ -48,6 +48,7 @@ fields:
 pages:
 - projects/create-and-manage-an-amazon-s3-bucket.md
 - projects/deploy-your-vue-project-to-netlify.md
+- projects/how-to-integrate-googlemaps-in-a-vue-app-without-trubles.md
 - projects/how-to-send-mails-from.net-core-api-in-2021.md
 - projects/ios-concept.md
 - projects/load-your-s3-images-blazing-fast-using-aws-cloudfront.md

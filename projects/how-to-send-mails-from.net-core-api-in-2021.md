@@ -95,6 +95,8 @@ Bellow, you can find my code, just copy and adapt it to your needs.
 
 SMTPCLient hat ist problems, by using MailKit most of these problems were gone and you end up with a robust, powerful and well-documented email client.
 
+I hope I could help you and save you some time, if you got feedback just contact me in the say hi section or [buy me a coffee](https://www.buymeacoffee.com/thekoi) if you want to support me.
+
 Happy coding,
 
 Alex.

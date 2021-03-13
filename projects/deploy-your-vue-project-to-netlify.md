@@ -1,76 +1,68 @@
 ---
 thumbnail: "/uploads/datei_000.jpeg"
-title: Deploy your vue Project to Netlify
+title: Safe time, money and nerves by deploying your project to Netlify.
 date: 2021-03-11
 categories:
-- AWS
-- S3
 - Cloud
-- ".net"
-- Backend Development
-- Amazon
+- Netflify
+- DevOps
+- CI
+- vue.js
+- gridsome
+- devHack
 project_bg_color: ''
 project_fg_color: "#000000"
-sumary: 'In this guide, I want to show you how to process formData objects in .net,
-  how to connect your API to your AWS resources, and finally how to Stream files through
-  your API on your S3 Bucket. '
+sumary: 'In this guide, I want to show you how to save nerves and cost when deploying
+  a vue.js Application.  We will set up continuous integration to deploy your vue.Js
+  app to netlify. I will go through the main interface, set up a custom domain, and
+  secure everything with HTTPS. '
 
 ---
-This is the last part of my series on how to Upload images on Amazon S3 from a Vue.Js frontend. In the last part, we have uploaded our Images from a .net core API. You can find it here if you missed it.
+In this Post i will guide you through the steps i took when deploying an project to Netlify.
 
-Once the files are uploaded the next requirement is to access them. There are several ways to access your files from an S3 bucket. You could either set everything to the public, which I do not recommend as you may already know, and access them directly with your buckeu URL + location + key. But
+Netlify is similar to AWS another cloud service, they offer a huge free plan with up to 100GB/month of traffic. Moreover, I love them for their great user experience when it comes to deployment compared to AWS and Microsoft azure. Bellow, I will describe all the steps it takes to get your app up and running.
 
-![](/uploads/50usnq.jpg)
+Af first sign in Using your Github account, then you will come to your home Page, I will describe their elements later.
 
-The next option would be using the S3 JS Libary to generate signedURLs and access the images in that way, this is verry safe but verry slow and you would need IAM user credidentials on your client side. Another way is uning presigned URLs, this is a safe and faster way. Even faster is accessing your images through Amazon CoundFront.
+#### Set up a Github CI
 
-Amazon CloudFront is a fast content delivery network (CDN), made to serve your content in a fast and secure way from all over the world. This keeps your latency low and your users safe. The best thing about it is, it is amazingly cheap, 10 TB data out per month will cost you about 0.085 € So lets dive into it!
+![](/uploads/startci.png)
 
-#### Setting up a CloudFront Distribution
+From the home menu click on create a new site and chose GitHub, authorize netlify to your GitHub account, and then chose either all repositories or just one, as I did on the left to install netlify.
 
-Go to your aws console and chose [cloudFront](https://console.aws.amazon.com/cloudfront/), then you will see a list of your Distribution. A Distribution is a set up CDN. The two Interesting columns for you would be the **Domain Name** and the origin. The **Origin** is the service CloudFront is forwarding, so this should be your S3 Bucket when we are done. 
+In the next step choose the repository you want to build your site from.
 
-The other important column for you is the **Domain Name**, this is the URL from where you can access youre images. Your final image URL then is _Domain Name + location + filename._
+In step 3 you need to specify your build settings, this highly depends on your application. When you are using **gridsome** your Build command is **gridsome Build** and the publish directory is dist.
 
-To set up a new Distribution click on **Create Distribution**, chose **Web** as delevery method and click **Get Started.**
+When using **nuxt** it would be **nuxt Build**, the directory stays the same, and with **plain vue** it stays **npm run build.** Finding these commands for every other framework is also no rocket science and is normally described in the framework's documentation.
 
-Origin Domain Name is your S3 Bucket created in Part 2, optionally you could also specify a path, this would be an folder inside your Bucket. Default cloudFront is accessing the home directory of your Bucket. 
+![](/uploads/screencapture-app-netlify-start-repos-gromann-the-koi-2021-03-09-14_18_27.png)
 
-Select **restrict Bucket access**, **Create new Identity** and **Yes, Update Bucket Policy**. Then AWS will handle everything to make shure ther are just Authenticated requests allowed to S3 and CloudFront is the only endpoint to get your files from. 
+...And that's it! Hit **Deploy site** and netlify is doing the rest for you! Just wait a few minutes and your site is up and running. Awesome right?
 
-To further improve security chose HTTPS Only, this leads to an set HSTS Header and drops all http headders. Also allow only Get, Head and Options. Chose restrict viewer access No, we well do that in one of my next Articles.
+#### Register a domain
 
-The rest you can set according to your personal preferences. I would also recomend logging, therefore you can just chose an Bucket for your logs and an file prefix to easily find them. 
+When the Upload is done you can proceed with registring a domain for your Project. You could either use a third party service like amazon Route 53, which is a little cheaper from the second year on. Or use netlifys service and simply register it there and they handle all the DNS pain for you.
 
-Bellow you can see my exampe Configuration:
+![](/uploads/register-domain.png)
 
-![](/uploads/screencapture-console-aws-amazon-cloudfront-home-2021-03-09-11_32_08.png)
+I have registered my domain directly within netlify, to complete I just hat to submit my payment information and confirm my purchase. After a few seconds, [https://www.the-koi.com/](https://www.the-koi.com/ "https://www.the-koi.com/") was up and running!
 
-After submitting your Distribution is goind to be created. You can go Back to the Overview and check the Status, after successfull creation it should switch to deployed. 
+For your SSL certificate, you just have to click on verify DNS, then everything should be fine and you have a nice Trustful website online!
 
-![](/uploads/clofro-ov.png)
+Reload after some minutes and your Domain managment tab Should look something like this:
 
-Then we can verify that the distribution works as expected.
+![](/uploads/screencapture-app-netlify-sites-goofy-nightingale-aa6742-settings-domain-2021-03-09-18_03_08.png)
 
-#### Acess the Uploaded image through Distribution
-
-I've uploaded the title image of this article to S3, to check if everything works fine we now need to build the URL to this image with the file name: Datei_000.jpeg. 
-
-To Access your image you now need to build your URL: 
-
-https://<your Distribution>/<optionally a folder>/<your file>
-
-This would be for my Image:
-
-https://d152puo1m6akm.cloudfront.net/Datei_000.jpeg
-
-If you access is only with http you will recieve an 403 error since http is not allowed. 
+And that's it! Your Page is online and now you could focus on your SEO and how to get traffic.
 
 #### Conclusion
 
-Accessing your images via CloudFront is an easy way to improve the loading performance of your project since it is faster than accessing S3 directly. Moreover it is a good way to improve the security since you can force using https and restricting to different headers way easier than directly in S3.
+Deploying your code to netlify takes really no time and you end up having a fast and secure server to serve your content.
 
-This was the last part of my S3 series, i hope i could help you, and let me know in the say Hi section how you've liked it or if you were facing any difficulties durring this article. Im looking forward to your feedback.
+Compared to WordPress you are also running on a budget, your only expenses are 13€ per year for the domain, and that's it!
+
+If you want to know more about netlify or got feedback for this article, just [say hi](https://www.the-koi.com/contact), or [buy me a coffee](https://www.buymeacoffee.com/thekoi).
 
 Happy coding,
 
