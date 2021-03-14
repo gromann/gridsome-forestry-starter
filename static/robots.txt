@@ -1,4 +1,3 @@
 User-agent: *
-Disallow: /journal/*
 host: 'https://the-koi.com',
 sitemap: 'https://the-koi.com/sitemap.xml',
