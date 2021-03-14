@@ -41,5 +41,3 @@ fields:
     - Alexander Grossmann
   label: Author
   default: Alexander Grossmann
-pages:
-- journal/build-drag-drop-upload-components-in-no-time-using-dropzone.js.md
