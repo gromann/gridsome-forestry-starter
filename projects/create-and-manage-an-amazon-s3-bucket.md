@@ -12,7 +12,15 @@ sumary: 'Everything you need to know about setting up AWS S3 Buckets, adding IAM
   for controlled access, and Configuring CORS to provide safe resource sharing. '
 
 ---
-This is the second part of my Series on how to Upload images on Amazon S3 from a Vue.Js frontend. In the last part, we were focusing on building a drag&drop vue component to upload the files. Now it is all about creating an AWS bucket to store your uploaded files.
+In the last part, we were focusing on building a drag&drop Vue component to upload the files.
+
+This is the second part of my Series on how to Upload images on Amazon S3 from a Vue.Js frontend.  Here it is all about creating an AWS bucket to store your uploaded files.
+
+[Section three will all about handling the images inside that backend and forwarding them to your S3 Bucket.](https://www.the-koi.com/projects/create-and-manage-an-amazon-s3-bucket/)
+
+You can skip this if you want to use another server technology.
+
+[In the last section, I will tell you how to access your images in a fast way.](https://www.the-koi.com/projects/load-your-s3-images-blazing-fast-using-aws-cloudfront/)
 
 Amazon S3 is a cloud storage service from Amazon AWS. When treated right it is fast, secure and with about 0,023 $ per GB, it is also one of the cheapest ways of storing your Data in the Cloud. So let\`s give it a try and start creating a Bucket and upload the first files.
 
@@ -42,7 +50,7 @@ Next, navigate to your IAM Management console and click Add user.
 
 ![](/uploads/addiamuser.png)
 
-Make sure to check programmatic access, you will need the generated keys in part 3.
+Make sure to check programmatic access, you will need the generated keys in [part 3](https://www.the-koi.com/projects/create-and-manage-an-amazon-s3-bucket/).
 
 ![](/uploads/addiamuserpermissions.png)
 
@@ -98,7 +106,7 @@ Bellow is my Configuration:
 
 This is everything you have to do to create your S3 Bucket. Now you can either directly upload your files, or you can follow my series and start using your own app to upload them.
 
-In the next part of my series, we are going to bring life into this bucket by pushing from our .net core 3.1 API to it.
+[In the next part of my series, we are going to bring life into this bucket by pushing from our .net core 3.1 API to it.](https://www.the-koi.com/projects/create-and-manage-an-amazon-s3-bucket/)
 
 I hope I could help you and save you some time, if you got feedback just contact me in the say hi section or [buy me a coffee](https://www.buymeacoffee.com/thekoi) if you want to support me.
 
