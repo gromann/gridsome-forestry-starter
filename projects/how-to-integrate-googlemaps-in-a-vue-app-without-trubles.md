@@ -1,5 +1,5 @@
 ---
-thumbnail: "/uploads/datei_000.jpeg"
+thumbnail: "/uploads/img_0853.jpg"
 title: How to integrate GoogleMaps in a vue app without trubles.
 date: 2021-03-11
 categories:
