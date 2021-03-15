@@ -1,27 +1,27 @@
 <template>
-    <div class="projects">
-        <div class="project" v-for="item in projects" :key="item.node.id">
-            <g-link :to="item.node.path" class="project-link">
-                    <g-image
-                        :src="item.node.thumbnail"
-                        :alt="item.node.title"
-                        class="thumbnail"
-                    />
-                <h3 class="project-title">{{ item.node.title }}</h3>
-            <div class="categories">
-                <span class="category" v-for="(item, index) in item.node.categories" :key="index">{{ item }}</span>
-            </div>
-            </g-link>
+    <div class="container">
+        <g-image
+                :src="project.thumbnail"
+                :alt="project.title"
+                class="thumbnail"
+                @mouseover="imgHover = true"
+                @mouseout="imgHover = false"
+        />
+        <div class="description" v-if="imgHover">
+            Article description + source
         </div>
     </div>
 </template>
 
 <script>
-    import ProjectThumbnail from "./ProjectThumbnail";
 export default {
+    data () {
+        return{
+        imgHover
+    }},
     props: {
-        projects: {
-            type: Array,
+        project: {
+            type: Object,
             required: true
         }
     }
@@ -41,7 +41,6 @@ export default {
 .project-link {
   text-decoration: none;
 }
-/*to show centered texts*/
 .container {
     position: relative;
     text-align: center;
@@ -72,8 +71,8 @@ export default {
   transform: scale(1.02);
   box-shadow: 0 20px 40px -20px rgba(0,0,0,0.25);
 
-   /* webkit-filter: blur(12px); !* Chrome, Safari, Opera *!
-    filter: blur(12px);*/
+    webkit-filter: blur(12px); /* Chrome, Safari, Opera */
+    filter: blur(12px);
 }
 
 @media (min-width: 920px) {
