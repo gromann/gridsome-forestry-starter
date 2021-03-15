@@ -1,5 +1,5 @@
 ---
-thumbnail: "/uploads/datei_000.jpeg"
+thumbnail: "/uploads/jessezhou-uvaz8igj_7w-unsplash.jpg"
 title: Safe time, money and nerves by deploying your project to Netlify.
 date: 2021-03-11
 categories:
