@@ -13,19 +13,21 @@ sumary: ''
 ---
 In my first guide, I want to show you how to build a Drag&Drop inside your Vue.js application. This is the first part in the series on how to securely upload your files to an S3 Bucket from vue.Js.
 
-For uploading the images we are going to use vue-dropzone, and to make the upload process more secure the images will at first be uploaded to a .net server and from there it will be streamed to your S3 Bucket.
+For uploading the images we are going to use vue-dropzone, and to make the upload process more secure. The images will at first be uploaded to a .net Core API, from there it will be streamed to your S3 Bucket.
 
 This will improve the overall security of your application and your AWS account since your sensitive login info is not saved inside your frontend where it could be easily exploited. Instead, it is saved in your backend application where an attacker could not access it.
 
-This article will be split into three sections.
+To provide you a better overview this article will be split into four sections.
 
 In Section One, I will describe how to set up the UI.
 
-Section two will all about handling the images inside that backend and forwarding them to your S3 Bucket.
+[In the second section, you will learn everything you need to know about creating your S3 Bucket and saving the images into it.](https://www.the-koi.com/projects/create-and-manage-an-amazon-s3-bucket/)
+
+[Section three will all about handling the images inside that backend and forwarding them to your S3 Bucket.](https://www.the-koi.com/projects/create-and-manage-an-amazon-s3-bucket/)
 
 You can skip this if you want to use another server technology.
 
-In the last section, you will learn everything you need to know about creating your S3 Bucket and saving the images to it.
+[In the last section, I will tell you how to access your images in a fast way.](https://www.the-koi.com/projects/load-your-s3-images-blazing-fast-using-aws-cloudfront/)
 
 # Building the UI
 
@@ -134,12 +136,12 @@ With this options set, our component will send a formData Object to the given UR
 
 You can also intercept Dropzone at different stages and execute additional code. For example, I'm appending the location where the image should be saved to the request, by simply listening to the _@vdropzone-sending_ event. Again you can find the whole list of supported events in the  [dropzone.js documentation](https://www.dropzonejs.com/ "dropzone.js docs").
 
-This was the first part of my series on how to securely upload anything to Amazon S3. In the [next part](https://www.the-koi.com/projects/create-and-manage-an-amazon-s3-bucket/), I'm going to explain [how to set up an Amazon S3 Bucket to store the images in.](https://www.the-koi.com/projects/create-and-manage-an-amazon-s3-bucket/)
+Before uploading your images, make sure to compress them. I could recommend [compressor.io. ](https://compressor.io/)
 
-stream the image through a .net Core 3.1 Api and store a reference of the Image inside it.
+This was the first part of my series on how to securely upload anything to Amazon S3. In the [next part](https://www.the-koi.com/projects/create-and-manage-an-amazon-s3-bucket/), I'm going to explain [how to set up an Amazon S3 Bucket to store the images in.](https://www.the-koi.com/projects/create-and-manage-an-amazon-s3-bucket/)
 
 I hope I could help you and save you some time, if you got feedback just contact me in the say hi section. If I could help you, you can support me by [buying me a coffee](https://www.buymeacoffee.com/thekoi).
 
-Happy coding, 
+Happy coding,
 
 Alex
