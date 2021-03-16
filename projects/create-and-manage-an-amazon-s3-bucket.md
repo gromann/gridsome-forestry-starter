@@ -12,7 +12,7 @@ sumary: 'Everything you need to know about setting up AWS S3 Buckets, adding IAM
   for controlled access, and Configuring CORS to provide safe resource sharing. '
 
 ---
-In the last part, we were focusing on building a drag&drop Vue component to upload the files.
+[In the last part, we were focusing on building a drag&drop Vue component to upload the files.](https://www.the-koi.com/projects/upload-images-from-vue/)
 
 This is the second part of my Series on how to Upload images on Amazon S3 from a Vue.Js frontend.  Here it is all about creating an AWS bucket to store your uploaded files.
 
@@ -20,7 +20,7 @@ This is the second part of my Series on how to Upload images on Amazon S3 from a
 
 You can skip this if you want to use another server technology.
 
-[In the last section, I will tell you how to access your images in a fast way.](https://www.the-koi.com/projects/load-your-s3-images-blazing-fast-using-aws-cloudfront/)
+[In the last section, I will tell you how to access your images in a fast way using amazon CloudFront.](https://www.the-koi.com/projects/load-your-s3-images-blazing-fast-using-aws-cloudfront/)
 
 Amazon S3 is a cloud storage service from Amazon AWS. When treated right it is fast, secure and with about 0,023 $ per GB, it is also one of the cheapest ways of storing your Data in the Cloud. So let\`s give it a try and start creating a Bucket and upload the first files.
 
