@@ -26,6 +26,10 @@ This is the third part of my Series on how to Upload images on Amazon S3 from a 
 
 Connecting to a third-party service directly from your frontend application isn't a good idea, because theoretically anyone could access your credentials. Using your API as a middleman is a good way to go, so let's get started!
 
+### Preqireties
+
+You need a working .net Core API, and a created Amazon S3 Bucket with your credentials for it. 
+
 #### Installing Nuget Packages
 
 For this task, you need the following Packages
@@ -51,7 +55,7 @@ Below you can find the endpoint from my controller, it is just available to auth
     }
 ```
 
-The most important thing is to add the FromForm parameter binding to **every** parameter! At next I create an AddImageCommand, this is just a transport class to pass the parameters to my Service. Then the service will be async called. Afterward, a wrapper with that result plus status code or an error message will be returned.
+The most important thing is to add the FromForm parameter binding to **every** parameter! At next I create an AddImageCommand, this is just a transport class to pass the parameters to my Service. Then the service will be async called. Afterward, a wrapper with that result plus a status code or an error message will be returned.
 
 #### Connecting to Amazon S3
 
@@ -133,7 +137,7 @@ Submitting Images from .net Core is really an easy job to do if you follow along
 
 If everything is set up correctly you should be done in no time, so let's get started!
 
-In the next part of my series, I will show you how to access those images in a fast way.
+[In the next part of my series, I will show you how to access those images in a fast way.](https://www.the-koi.com/projects/load-your-s3-images-blazing-fast-using-aws-cloudfront/)
 
 I hope I could help you and save you some time, if you got feedback just contact me in the say hi section or you can [support me and buy me a coffee](https://www.buymeacoffee.com/thekoi).
 
