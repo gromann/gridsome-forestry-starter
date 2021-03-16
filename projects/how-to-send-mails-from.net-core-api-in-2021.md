@@ -1,5 +1,5 @@
 ---
-thumbnail: "/uploads/datei_000.jpeg"
+thumbnail: "/uploads/kutan-ural-ycxbgq7nua8-unsplash.jpg"
 title: How to send mails from .net Core API in 2021
 date: 2021-03-11
 categories:
