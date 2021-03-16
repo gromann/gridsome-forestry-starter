@@ -16,7 +16,13 @@ sumary: 'In this guide, I want to show you how to process formData objects in .n
   your API on your S3 Bucket. '
 
 ---
-This is the third part of my series on how to Upload images on Amazon S3 from a Vue.Js frontend. In the last part, we were focusing on creating an S3 Bucket and enabling it just for private access. You can find it here if you missed it.
+[In the first part, we were focusing on building a drag&drop Vue component to upload the files.](https://www.the-koi.com/projects/upload-images-from-vue/)
+
+[The last article was all about handling the images inside that backend and forwarding them to your S3 Bucket.](https://www.the-koi.com/projects/create-and-manage-an-amazon-s3-bucket/)
+
+This is the third part of my Series on how to Upload images on Amazon S3 from a Vue.Js frontend.  Here it is all about creating an AWS bucket to store your uploaded files.
+
+[In the last section, I will tell you how to access your images in a fast way.](https://www.the-koi.com/projects/load-your-s3-images-blazing-fast-using-aws-cloudfront/)
 
 Connecting to a third-party service directly from your frontend application isn't a good idea, because theoretically anyone could access your credentials. Using your API as a middleman is a good way to go, so let's get started!
 
