@@ -4,11 +4,11 @@
             <div class="left">
                 <g-link :to="{ name: 'home' }" class="home-link">
                     <h2>The Koi </h2>
-                    <img
+                    <!--<img
                         src="../../static/logo.svg"
                         :alt="settings.site_name"
                         class="logo"
-                    />
+                    />-->
                 </g-link>
             </div>
             <nav class="nav right">
