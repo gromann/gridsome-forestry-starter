@@ -1,5 +1,5 @@
 ---
-thumbnail: "/uploads/whatsapp-image-2021-03-04-at-22-44-20.jpeg"
+thumbnail: "/uploads/img_0885.JPG"
 title: Vue Upload Images  in no time using Dropzone.js
 date: 2021-03-08
 categories:
