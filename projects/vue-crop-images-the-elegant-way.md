@@ -1,12 +1,11 @@
 ---
 thumbnail: "/uploads/img_0884.JPG"
 title: Vue crop images, the elegant way
-date: 2021-03-08
+date: 2021-03-18
 categories:
-- vue
-- Components
 - awesome libaries
-- upload images
+- vue images
+- image editing
 project_bg_color: ''
 project_fg_color: "#000000"
 sumary: "I this guide, I want to show you how to build a vue component to crop and
