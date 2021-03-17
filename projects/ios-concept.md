@@ -34,8 +34,6 @@ You can skip this if you want to use another server technology.
 
 [In the last section, I will tell you how to access your images in a fast way.](https://www.the-koi.com/projects/load-your-s3-images-blazing-fast-using-aws-cloudfront/)
 
-# Building the UI
-
 The Images are going to be uploaded using dropzone.js, this is an amazing js library providing feature-rich drag&drop functionality with upload status, etc. in no time.
 
 ### Install and setup Dropzone.js
@@ -48,7 +46,9 @@ First of all, we are adding dropzone to our project.
     npm install vue2-dropzone
 ```
 
-After the installation, you have full access to the dropzone.js functionality documented under: and it could be imported like any other vue-component.
+After the installation, you have full access to the [dropzone.js functionality](https://www.dropzonejs.com/#installation) and it could be imported like any other vue-component.
+
+### Setting up dropzone.js
 
 Next, we will set up the dropzone component, this should look something like this:
 
