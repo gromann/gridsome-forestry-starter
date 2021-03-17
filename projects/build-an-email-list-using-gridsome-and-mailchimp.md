@@ -8,95 +8,53 @@ categories:
 - MailKit
 project_bg_color: ''
 project_fg_color: "#000000"
-sumary: 'In this post, I want to provide you a simple guide on how to send mails from
-  your API using MailKit. '
+sumary: 'In this post, I want to show you how to set up a personal email list using
+  MailChimp. '
 
 ---
-I had an UseCase where I had to send different emails to our clients depending on what they did on our application. To do this I first started using the SMTP client, as many Blogposts and StackOverflow answers might suggest. But I was not happy with its behavior, so I dug a bit deeper into the topic. I finally found [MailKit](https://github.com/jstedfast/MailKit), a powerful package with the goal to provide the .net community a robust RFC, compatible email Client.
+As you have probably read before, if not, you will read it now, an personal email list is a very important marketing tool for you and your product. You have the ability to keep connected with your users, or customers who are loyal enough to share their email with you and want to keep informed about your next article. Another important thing is that an email list is actually your property. So please keep these two things in mind, set up your email list immediately, and most importantly treat your subscribers respectfully. They are your most valuable resource, so don't spam them, create beautiful valuable emails, and do not sell their contact information!
 
-It is also recommended by [Microsoft documentation](https://docs.microsoft.com/en-us/dotnet/api/system.net.mail.smtpclient?view=net-5.0), so I gave it a try.
+### Create your MailChimp Account
 
-#### Setting up MailKit
+If you have less than 2.000 subscribers, Mailchimp is free, up to 50.000 subscribers costs you 9,99/month, so the free plan is good to start.
 
-First of all, install the MailKit NuGet package.
+So go to MailChimp.com and create your account, enter all your information and confirm your email. Then you will find yourself on your personal dashboard.
 
-    Install-Package MailKit
+### Build your signUp form
 
-The create a new MimeMessage, with from and to, add your subject and body.
+Go to audience-> signUp forms.
 
-So this is pretty natural and like you would do when using your email client to send Mails.
+Ther you chose your audience and then you can choose the type of form that you want. I have chosen the pop-up form, _if you find this annoying, please email me or write it in the say Hi section_.
 
-Up next you have to set up a connection to your Email Client.
+When chosen a type you get to the form builder, from there you can build your forms, obviously. So enter everything you want and confirm.
 
-This is where the time will go since sometimes you will run into trouble. Some mail servers like mine, do not accept requests from non-https servers. So since localhost has no certificates I was not able to test this locally, instead, I had to push my code every time and wait till it is running on my remote instance till I can test if it works.
-when trying to do this from localhost you probably recieve following error:
+![](/uploads/mailchimp-popup.png)
 
-    MailKit.Security.SslHandshakeException: An error occurred while attempting to establish an SSL or TLS connection.
-    
-    
-    
-    The server's SSL certificate could not be validated for the following reasons:
-    
-    • The server certificate has the following errors:
-    
-      • Die Sperrfunktion konnte keine Sperrprüfung für das Zertifikat durchführen.
-    
-    
-    
-     ---> System.Security.Authentication.AuthenticationException: The remote certificate is invalid according to the validation procedure.
-    
+When you are ready, you can also directly connect your website and add their script to the head of your site. So let\`s do this!
 
-To create a client you need to provide your SMTP server address and port.
+Entering a script in your head tag is with vue.js a little bit tricky.
 
-Next, you need to tell your username (could be your mail address or not, depends on your mail server provider), and password.
+Gridsome is using by default [vue-meta](https://vue-meta.nuxtjs.org/api/#install). By using vue-meta you can access your applications head simply from your main.js.
 
-_When using Gmail, you will have to set an_ [_App Password_](https://support.google.com/accounts/answer/185833) _for your account, otherwise, your request will be rejected and you will receive:_ 
-
-    MailKit.Security.AuthenticationException: 535: 5.7.8 Username and Password not accepted. Learn more at
-    5.7.8  https://support.google.com/mail/?p=BadCredentials g26sm1148794ejz.70 - gsmtp
-    
-
-Then the email will be sent and the client should be disconnected again.
-
-And that's it!
-
-Bellow, you can find my code, just copy and adapt it to your needs.
-
-```cs  	 var message = new MimeMessage();
-                message.From.Add(new MailboxAddress("from name", "from@email.com"));
-                message.To.Add(new MailboxAddress("to name", "to@email.com"));
-                message.Subject = "Look at this!";
-    
-                message.Body = new TextPart("plain")
-                {
-                    Text = @"Hey!
-                    I just wanted you to tell about the awesome blog i recently found!
-                    www.the-koi.com so go and check it out! 
-                    reguards, 
-                    yourName"
-                };
-    
-                using (var client = new SmtpClient())
-                {
-                    client.Connect("<smtp server>", 465, true);
-    
-                    // Note: only needed if the SMTP server requires authentication
-                    client.Authenticate("from@email.com", "<password>");
-    
-                    client.Send(message);
-                    client.Disconnect(true);
-                }
-    
-    
-                return ServiceResult.Ok();
+```js 
+    head.script.push({
+        innerHTML: '!function(c,h,i,m,p){m=c.createElement(h),' +
+            'p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script",' +
+            '"https://chimpstatic.com/mcjs-connected/js/users/.../....js");',
+        id: "yourId"
+    });
 ```
 
-#### Conclusion
+_head.script.push_, adds a script tag to your head, parameters like id are defined in the same way as attributes in an Objet. 
 
-SMTPCLient hat ist problems, by using MailKit most of these problems were gone and you end up with a robust, powerful and well-documented email client.
+To add your javaScript snippet, simply put it behind the _innerHtml_. 
 
-I hope I could help you and save you some time, if you got feedback just contact me in the say hi section or [buy me a coffee](https://www.buymeacoffee.com/thekoi) if you want to support me.
+When they found the tag you can continue and everything is set up.
 
-Happy coding,
+Now you can wait for your subscribers and start your campaigns.
+
+When I have gained enough knowledge and subscribers, I will post more articles on Mailchimp, how to make nice campaigns, and provide you with valuable tips and tricks. To subscribe to not miss it!
+
+Happy mailing,
 
 Alex.
