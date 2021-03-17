@@ -39,7 +39,13 @@ export default function(Vue, { head }) {
         src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js',
         async: true,
         dataAdClient: "ca-pub-8164918311331640"
-    })
+    });
+    head.script.push({
+        innerHTML: '!function(c,h,i,m,p){m=c.createElement(h),' +
+            'p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script",' +
+            '"https://chimpstatic.com/mcjs-connected/js/users/ee93ba2889dc937335d6b7238/13f57747b638e0690682a59e3.js");',
+        id: "mcjs"
+    });
 
   Vue.use(require('vue-script2'));
 
