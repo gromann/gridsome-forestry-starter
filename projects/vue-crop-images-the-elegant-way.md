@@ -1,5 +1,5 @@
 ---
-thumbnail: "/uploads/whatsapp-image-2021-03-04-at-22-44-20.jpeg"
+thumbnail: "/uploads/img_0884.JPG"
 title: Vue crop images, the elegant way
 date: 2021-03-08
 categories:
@@ -9,140 +9,121 @@ categories:
 - upload images
 project_bg_color: ''
 project_fg_color: "#000000"
-sumary: |-
-  I this guide, I want to show you how to build an amazing Drag&Drop component, to upload one or multiple images in vue.js.
-
-  We will use a library called dropzone.js from where you can easily upload images to nearly everywhere.
+sumary: "I this guide, I want to show you how to build a vue component to crop and
+  upload images, in a fast and scalable way. \n\nTo accomplish this, I\\`m using vue
+  advanced cropper."
 
 ---
-In my first guide, I want to show you how to build a Drag&Drop inside your Vue.js application. This is the first part in the series on how to securely upload your files to an S3 Bucket from vue.Js.
+Hello, and welcome (back). In one of my previous examples, I showed you how to do vue image upload in an easy way. But sometimes you do not only want to upload images, you also want to transform them to fit, for example in a predefined box.
 
-For uploading the images we are going to use vue-dropzone, and to make the upload process more secure. The images will at first be uploaded to a .net Core API, from there it will be streamed to your S3 Bucket.
+To accomplish this I will make another component where the user could adjust the image to fit your needs. All this will happen using a library called [vue advanced cropper](https://norserium.github.io/vue-advanced-cropper/introduction/getting-started.html), and they hold what the name promises. So let's get started!
 
-This will improve the overall security of your application and your AWS account since your sensitive login info is not saved inside your frontend where it could be easily exploited. Instead, it is saved in your backend application where an attacker could not access it.
+### Install vue advanced cropper
 
-To provide you a better overview this article will be split into four sections.
+    npm install -S vue-advanced-cropper
 
-In Section One, I will describe how to set up the UI.
+### Building the component
 
-[In the second section, you will learn everything you need to know about creating your S3 Bucket and saving the images into it.](https://www.the-koi.com/projects/create-and-manage-an-amazon-s3-bucket/)
+![](/uploads/cropdone.png)
 
-[Section three will all about handling the images inside that backend and forwarding them to your S3 Bucket.](https://www.the-koi.com/projects/create-and-manage-an-amazon-s3-bucket/)
+First of all import the Cropper library and also its CSS. then just use it as any other component. Give a source to the image you want to crop and that's basically it!
 
-You can skip this if you want to use another server technology.
+To beautify the whole thing I added the _example-cropper_ CSS class, where I basically just set a height and width to prevent the cropper from growing over the window size and get unusable.
 
-[In the last section, I will tell you how to access your images in a fast way.](https://www.the-koi.com/projects/load-your-s3-images-blazing-fast-using-aws-cloudfront/)
+As an image source, you can use everything you want, also our elegant drag&drop component from [this tutorial](https://www.the-koi.com/projects/upload-images-from-vue/).
 
-# Building the UI
+To access the cropped images use _this_.$refs.cropper.getResult(); this will access the cropper component and get the cropped image out of it! And that's it! Implementing this should take just some minutes and you will end up with a functional and elegant vue image crop component.
 
-The Images are going to be uploaded using dropzone.js, this is an amazing js library providing feature-rich drag&drop functionality with upload status, etc. in no time.
+Below you can find the complete code, feel free to copy and use it!
 
-### Install and setup Dropzone.js
-
-I will use the vue wrapper of dropzone, called vue-Dropzone [vue-Dropzone](https://rowanwins.github.io/vue-dropzone/docs/dist/#/installation "vue-dropzone").
-
-First of all, we are adding dropzone to our project.
-
-``` js
-    npm install vue2-dropzone
-```
-
-After the installation, you have full access to the dropzone.js functionality documented under: and it could be imported like any other vue-component.
-
-Next, we will set up the dropzone component, this should look something like this:
-
-If The Image was uploaded successfully, it will be displayed like on the left, with the image name on Huver.
-
-Since we do not allow duplicated images on our S3 Bucket, adding the same Image twice will lead to an error (right), the image will be marked and on hover, the error message will be displayed.
-
-```js
+````js 
     <template>
-      <div>
-        {{ label }}
-        <vue-dropzone
-          id="drop1"
-          ref="myVueDropzone"
-          :options="dropOptions"
-          @vdropzone-sending="appendLocation"
-          @vdropzone-success="handleResponse"
-        ></vue-dropzone>
-      </div>
+      <v-card width="auto">
+        <div class="example">
+          <cropper ref="cropper" class="example-cropper" :src="image" />
+                <drop-zone
+      			v-model="image"
+      			:label="upload"
+      			:location="location"
+      			@uploaded="newImagesUploaded"
+      			class="pb-15"
+    			/>
+          <div class="button-wrapper">
+            <span class="button" @click="cropImage">Crop image</span>
+          </div>
+        </div></v-card
+      >
     </template>
     
     <script>
-    import ImageRepository from "../../Repository/ImageRepository";
-    import "vue2-dropzone/dist/vue2Dropzone.min.css";
-    import vueDropzone from "vue2-dropzone";
-    
+    import plannerEventBus from "../bars/planner/plannerEventBus";
+    import { Cropper } from "vue-advanced-cropper";
+    import "vue-advanced-cropper/dist/style.css";
     export default {
-      name: "dropZone",
-      components: { vueDropzone },
-      props: {
-        label: {
-          type: String
-        },
-        location: { type: String, required: true }
+      name: "uploadPlannerBgImgCard",
+      components: {
+        Cropper
       },
+      props: {},
       data() {
         return {
-          selectedImages: [],
-          files: new FormData(),
-          baseURL: "youApiUrl",
-          dropOptions: {
-            url: baseURL + "yourEndpoint",
-            addRemoveLinks: true,
-            maxFilesize: 3,
-            accept: function(file, done) {
-              console.log(file);
-              if (
-                file.type.toLowerCase() != "image/jpg" &&
-                file.type.toLowerCase() != "image/gif" &&
-                file.type.toLowerCase() != "image/jpeg" &&
-                file.type.toLowerCase() != "image/png"
-              ) {
-                done("Invalid file");
-              } else {
-                done();
-              }
-            },
-            headers: {
-              "Cache-Control": null,
-              "X-Requested-With": null,
-              withCredentials: true
-            }
-          }
+          image:
+            "https://images.pexels.com/photos/4218687/pexels-photo-4218687.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
         };
       },
       methods: {
-        appendLocation(file, xhr, formData) {
-          formData.append("path", this.location);
-        },
-        handleResponse(file, response) {
-          console.log(response);
-          var Image = {
-            key: response.key,
-            imageId: parseInt(response.id),
-            bucket: this.location
-          };
-          this.selectedImages.push(Image);
-          this.$emit("input", this.selectedImages);
-        },
+        cropImage() {
+          const result = this.$refs.cropper.getResult();
+          const newTab = window.open();
+          newTab.document.body.innerHTML = `<img src="${result.canvas.toDataURL(
+            "image/jpeg"
+          )}"></img>`;
+        }
       }
     };
     </script>
+    
+    <style>
+    .example-cropper {
+      border: solid 1px #eee;
+      min-height: 300px;
+      width: 100%;
+      height: 85vh;
+    }
+    
+    .button-wrapper {
+      display: flex;
+      justify-content: center;
+      margin-top: 17px;
+    }
+    
+    .button {
+      color: white;
+      font-size: 16px;
+      padding: 10px 20px;
+      background: #35b392;
+      cursor: pointer;
+      transition: background 0.5s;
+      font-family: Open Sans, Arial;
+      margin: 0 10px;
+    }
+    
+    .button:hover {
+      background: #38d890;
+    }
+    
+    .button input {
+      display: none;
+    }
+    </style>
 ```
+    
 
-In the above code, we first import the dropzone component and display a label given as a prop above it.
+### Conclusion
 
-The options passed to the component are defined in the dropOptions object.
+Vue advanced cropper is an amazing library to easily build a bullet-proof image crop functionality for your vue project. This library is not only easy to use, but it is also highly extendable and customizable. The documentation is also very easy to follow with many examples. 
 
-With this options set, our component will send a formData Object to the given URL, got remove links to delete uploaded images again. The accept property could be used to define the accepted file types via this filter function, with maxFileSize we are not accepting files bigger than 3MB. The headers are set according to the needs of the API.
-
-You can also intercept Dropzone at different stages and execute additional code. For example, I'm appending the location where the image should be saved to the request, by simply listening to the _@vdropzone-sending_ event. Again you can find the whole list of supported events in the  [dropzone.js documentation](https://www.dropzonejs.com/ "dropzone.js docs").
-
-Before uploading your images, make sure to compress them. I could recommend [compressor.io. ](https://compressor.io/)
-
-This was the first part of my series on how to securely upload anything to Amazon S3. In the [next part](https://www.the-koi.com/projects/create-and-manage-an-amazon-s3-bucket/), I'm going to explain [how to set up an Amazon S3 Bucket to store the images in.](https://www.the-koi.com/projects/create-and-manage-an-amazon-s3-bucket/)
+_Note: This is no affiliate, this is pure enthusiasm!_
 
 I hope I could help you and save you some time, if you got feedback just contact me in the say hi section. If I could help you, you can support me by [buying me a coffee](https://www.buymeacoffee.com/thekoi).
 
