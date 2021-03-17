@@ -7,6 +7,7 @@ categories:
 - Components
 - awesome libaries
 - upload images
+- vue images
 project_bg_color: ''
 project_fg_color: "#000000"
 sumary: |-
