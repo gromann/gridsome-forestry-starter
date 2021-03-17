@@ -32,7 +32,7 @@ To beautify the whole thing I added the _example-cropper_ CSS class, where I bas
 
 As an image source, you can use everything you want, also our elegant drag&drop component from [this tutorial](https://www.the-koi.com/projects/upload-images-from-vue/).
 
-To access the cropped images use _this_.$refs.cropper.getResult(); this will access the cropper component and get the cropped image out of it! And that's it! In the [Documentation](https://norserium.github.io/vue-advanced-cropper/introduction/getting-started.html), there are many ways to extend your cropper to fit exactly your requirements! 
+To access the cropped images use _this_.$refs.cropper.getResult(); this will access the cropper component and get the cropped image out of it! And that's it! In the [Documentation](https://norserium.github.io/vue-advanced-cropper/introduction/getting-started.html), there are many ways to extend your cropper to fit exactly your requirements!
 
 Implementing this should take just some minutes and you will end up with a functional and elegant vue image crop component.
 
@@ -119,10 +119,10 @@ Below you can find the complete code, feel free to copy and use it!
     }
     </style>
 ```
-    
+
 ### Conclusion
 
-Vue advanced cropper is an amazing library to easily build a bullet-proof image crop functionality for your vue project. This library is not only easy to use, but it is also highly extendable and customizable. The documentation is also very easy to follow with many examples. 
+Vue advanced cropper is an amazing library to easily build a bullet-proof image crop functionality for your vue project. This library is not only easy to use, but it is also highly extendable and customizable. The documentation is also very easy to follow with many examples.
 
 _Note: This is no affiliate, this is pure enthusiasm!_
 
@@ -131,4 +131,3 @@ I hope I could help you and save you some time, if you got feedback just contact
 Happy coding,
 
 Alex
-```
