@@ -1,11 +1,12 @@
 ---
 thumbnail: "/uploads/kutan-ural-ycxbgq7nua8-unsplash.jpg"
-title: Build an email list using gridsome and mailchimp
+title: Build an email list using gridsome and MailChimp
 date: 2021-03-11
 categories:
-- ".net"
-- Backend-Development
-- MailKit
+- MailChimp
+- EmailList
+- gridsome
+- vue-meta
 project_bg_color: ''
 project_fg_color: "#000000"
 sumary: 'In this post, I want to show you how to set up a personal email list using
