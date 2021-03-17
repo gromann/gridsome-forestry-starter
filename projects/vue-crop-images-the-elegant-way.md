@@ -32,11 +32,13 @@ To beautify the whole thing I added the _example-cropper_ CSS class, where I bas
 
 As an image source, you can use everything you want, also our elegant drag&drop component from [this tutorial](https://www.the-koi.com/projects/upload-images-from-vue/).
 
-To access the cropped images use _this_.$refs.cropper.getResult(); this will access the cropper component and get the cropped image out of it! And that's it! Implementing this should take just some minutes and you will end up with a functional and elegant vue image crop component.
+To access the cropped images use _this_.$refs.cropper.getResult(); this will access the cropper component and get the cropped image out of it! And that's it! In the [Documentation](https://norserium.github.io/vue-advanced-cropper/introduction/getting-started.html), there are many ways to extend your cropper to fit exactly your requirements! 
+
+Implementing this should take just some minutes and you will end up with a functional and elegant vue image crop component.
 
 Below you can find the complete code, feel free to copy and use it!
 
-````js 
+```js 
     <template>
       <v-card width="auto">
         <div class="example">
@@ -130,3 +132,4 @@ I hope I could help you and save you some time, if you got feedback just contact
 Happy coding,
 
 Alex
+```
