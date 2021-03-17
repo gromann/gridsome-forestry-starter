@@ -120,7 +120,6 @@ Below you can find the complete code, feel free to copy and use it!
     </style>
 ```
     
-
 ### Conclusion
 
 Vue advanced cropper is an amazing library to easily build a bullet-proof image crop functionality for your vue project. This library is not only easy to use, but it is also highly extendable and customizable. The documentation is also very easy to follow with many examples. 
