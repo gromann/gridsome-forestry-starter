@@ -32,7 +32,6 @@
         <div id="adsgoeshere" style="background: #1d1f29; padding-top:60px; text-align: center;" v-html="adsenseContent"></div>
 
         <div v-html="$page.post.content" class="content" />
-        <div id="BMC-Widget" ref="BMC-Widget">bmc</div>
       </div>
     </div>
 <!--    related section -->
@@ -46,6 +45,7 @@ query ProjectPost ($path: String!) {
   post: projectPost (path: $path) {
     title
     sumary
+    thumbnail
     date (format: "YYYY")
     content
     categories
@@ -69,6 +69,7 @@ query ProjectPost ($path: String!) {
 
 <script>
   import LatestJournals from "@/components/LatestJournals"
+  import config from "../../gridsome.config";
 
   export default {
     data () {
@@ -99,9 +100,22 @@ components:{
   metaInfo () {
     return {
       title: this.$page.post.title,
+      meta: [
+        { name: 'description', content: this.$page.post.sumary},
+        { key:"og:description",  property: "og:description", content: this.$page.post.sumary },
+        { key:"og:image", property: "og:image", content: this.$page.post.thumbnail },
+        { property: 'og:title', content: this.$page.post.title},
+        { property: 'og:site_name', content: 'the-koi.com/'+ this.$page.post.title},
+        {
+          key: 'keywords',
+          name: 'keywords',
+          content: this.$page.post.categories
+        },
+        // {property: 'og:url', content: 'https://epiloge.com/@' + this.userData.username},
+      ],
       bodyAttrs: {
         style: `background-color: ${this.$page.post.project_bg_color ? this.$page.post.project_bg_color : 'var(--color-base)'}; color: ${this.$page.post.project_fg_color ? this.$page.post.project_fg_color : 'var(--color-contrast)'}`
-      }
+      },
     }
   }
 }
