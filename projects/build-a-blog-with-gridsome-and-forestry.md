@@ -12,7 +12,7 @@ project_bg_color: ''
 project_fg_color: "#000000"
 sumary: "Gridsome is an awesome framework when it comes to blogging, and forestry
   is the perfect CMS for easily getting started! \n\nIn this post, I want to show
-  you how to set up a basic blog fast and for free by using those two frameworks."
+  you how to set up your personal blog fast and for free by using those two frameworks."
 
 ---
 When it comes to creating a blog, most people tend to chose WordPress with Elementor. This sounds also like an amazing combination, there are a whole bunch of finished teams and also a high amount of plugins for integrating ads, analytics, or optimizing SEO. But it comes at a cost. You will have to pay for the commercial WordPress, maybe for some plugins and themes, and since WordPress needs a Database, you will need to pay for domain hosting.
@@ -69,13 +69,13 @@ The rest should be clear for you if you have vue basics.
 
 #### Conclusion
 
-You must not spend any money when building a blog, you can also come up with fast, beautiful, and flexible solutions by using JAM stacks like this one. 
+You must not spend any money when building a blog, you can also come up with fast, beautiful, and flexible solutions by using JAM stacks like this one. By going this way you end up having an flexible future prove solution which will fit exactly your needs. It also wont take you long, I promise!
 
 I will definitely be working on more articles on Building such blogs, so please subscribe to my email list and stay tuned!
 
 I also hope that you have enjoyed reading this article and I would be glad if you send me links to blogs built with this tutorial in the [say Hi section](https://www.the-koi.com/contact). 
 
-thanks for reading! If you want to know more about Gridsome or got problems or feedback for this article, just [say hi](https://www.the-koi.com/contact), or [buy me a coffee](https://www.buymeacoffee.com/thekoi).
+Thanks for reading! If you want to know more about Gridsome or got problems or feedback for this article, just [say hi](https://www.the-koi.com/contact), or [buy me a coffee](https://www.buymeacoffee.com/thekoi).
 
 Happy coding,
 
