@@ -1,136 +1,81 @@
 ---
 thumbnail: "/uploads/img_0853.jpg"
 title: Build a blog with gridsome and forestry
-date: 2021-03-11
+date: 2021-03-19
 categories:
-- Cloud
 - Netflify
-- DevOps
-- CI
 - vue.js
 - gridsome
-- devHack
+- start blogging
+- forestry
 project_bg_color: ''
 project_fg_color: "#000000"
-sumary: I will show you a quick and easy way on how to integrate GoogleMaps into your
-  vue.js app.
+sumary: "Gridsome is an awesome framework when it comes to blogging, and forestry
+  is the perfect CMS for easily getting started! \n\nIn this post, I want to show
+  you how to set up a basic blog fast and for free by using those two frameworks."
 
 ---
-GoogleMaps is awesome, but the GoogleMaps API is even more Awesome. You can not only show places or calculate routes but you're also able to draw on the map, measure distances and even use heatmaps for data visualization.
+When it comes to creating a blog, most people tend to chose WordPress with Elementor. This sounds also like an amazing combination, there are a whole bunch of finished teams and also a high amount of plugins for integrating ads, analytics, or optimizing SEO. But it comes at a cost. You will have to pay for the commercial WordPress, maybe for some plugins and themes, and since WordPress needs a Database, you will need to pay for domain hosting.
 
-Let´s get started by creating an API Key.
+When using gridsome with a JAM stack, you only have to pay for your domain. Forestry is offering an amazing free plan and is directly integrated into your git repo, so you also do not pay for any database or API hosting.
 
-#### Creating an API key
+Gridsome is a Static site generator, and static sides could be hosted at [netlify ](https://www.netlify.com/pricing/)and [azure static](https://azure.microsoft.com/en-us/pricing/details/app-service/static/) for free! So you only need to pay for your domain.
 
-GoogleMaps is not a free service, so before you can get access to it, you have to sign up for an API Key.
+Another huge advantage is that you are way more flexible and highly customizable. So let's get started! 
 
-For this go to the [google cloud developer console](https://console.cloud.google.com/apis/credentials) create an account and a project if you don't have it already, and then go to **APIs** and **Credentials**. From there, under **create credentials**, you can create new API Keys to use in your apps. Next you add permissions to your keys.
+### Picking a gridsome Starter
 
-For this navigate to [**libary**](https://console.cloud.google.com/apis/library), and chose all the libraries you want to get access to.
+Gridsome provides a list of [amazing starters](https://gridsome.org/starters/) on their homepage! Just pick one that fits your needs and you are ready to go!
 
-![](/uploads/maps-lib.png)
+### Connecting Forestry
 
-Just make sure to check the prices before selecting one of those.
+![](/uploads/gridsome-forestry.png)
 
-Then you also have to set up billing for your account and you are ready to move on.
+For all of your Forestry starters, you will find this button, where you are creating a new project inside your repo with this code as a template.
 
-#### Integrating Google maps in vue
+After that, the forestry app will open and you will find your CMS Overview. 
 
-I have tried several ways, starting from this [vue](https://vuejs.org/v2/cookbook/practical-use-of-scoped-slots.html) tutorial, where I got a Nuxt error. To the v[ue2-google-maps](https://github.com/xkjyeah/vue-google-maps) library, where I found out that using the Maps APIs is really a pain. So I started to try to implement the vanilla js way into vue, after some problems later on I found a really nice [npm](https://www.npmjs.com/package/google-maps) package that handles all the stuff for me. The Google maps loader handles all the connection stuff for you and makes sure everything is set up!
+![](/uploads/gridsome-forestry-ov.png)
 
-Now the only task is loading google maps where it should load and define additional libaries. I've done this below.
+From here first go to Theme Config, and edit your Blog name etc. to get started. Al of the changes you make here will simply editing the markdown files you find inside your project, 
 
-```js
-<template>
-  <v-container fluid>
-    <div id="map"></div>
-  </v-container>
-</template>
+As a first step I will recommend entering your Blog name and a short description, this happens in the Theme Config section.
 
-<script>
-import { Loader, LoaderOptions } from "google-maps";
-const options = { libraries: ["drawing"] };
-const loader = new Loader("yourKeyHere", options);
+![](/uploads/gridsome-forestry-theme.png)
 
-export default {
-  name: "googleMaps",
-  mounted: async function() {
-    const google = await loader.load();
-    const map = new google.maps.Map(document.getElementById("map"), {
-      center: { lat: 47.076668, lng: 15.421371 },
-      zoom: 20
-    });
-  }
-};
-</script>
+Here I have set everything to my needs, as you can also see on my home page. 
 
-<style scoped>
-#map {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 100px;
-  padding-bottom: 10px;
-}
-</style>
-```
+All the changes you make in these editors are saved into markdown files you will find inside your project and committed when you are hitting the save button. 
 
-Above I have imported the loader and the loader options from the npm package.
+In the Front matter you can customize all these fields and add me ones, just make sure to add them also in your vue app.
 
-Then I create a new Loader instance by passing my API key and my options to the Loader. In the options I have defined a library, I want to use later on.
+### Directory Structure
 
-In The mounted, google maps will be loaded and the map will be inserted into the map div from above. The map will get initial coordinates and an initial zoom, which is on house level.
+As I mentioned before, all of your changes from the CMS will be saved to Markdown files, you can customize everything, but you also need to customize your code. Here I want to show you where you find all the stuff you need. 
 
-Then I have just added some styling to make the map appear inside my component as I want it to. If you skip this the map might not be visible.
+![](/uploads/gridsome-forestry-structure.png)
 
-#### Using a Libary
+In the .forestry folder, all your config will be saved, you can find here all the fields you need for your pages. 
 
-Next, I want to show you how to use libraries within this approach.
+Posts and projects contain your actual content, there are the markdown files containing your awesome Articles. So if you don't have an active internet connection you could also edit them here!
 
-You can find all the available libraries and examples on how to use them on Google Developer docs. I want to use the [drawing library](https://developers.google.com/maps/documentation/javascript/drawinglayer) as an example.
+Pages contain the main pages of your blog, gridsome is automatically creating routes to them with their name inside.
 
-```js 
-  mounted: async function() {
-    const google = await loader.load();
-    const map = new google.maps.Map(document.getElementById("map"), {
-      center: { lat: 47.076668, lng: 15.421371 },
-      zoom: 20
-    });
-    // add drawing menu
-    const drawingManager = new google.maps.drawing.DrawingManager({
-      drawingMode: google.maps.drawing.OverlayType.MARKER,
-      drawingControl: true,
-      drawingControlOptions: {
-        position: google.maps.ControlPosition.TOP_CENTER,
-        drawingModes: [
-          google.maps.drawing.OverlayType.POLYGON,
-          google.maps.drawing.OverlayType.POLYLINE,
-          google.maps.drawing.OverlayType.RECTANGLE
-        ]
-      },
-      circleOptions: {
-        fillColor: "#ffff00",
-        fillOpacity: 1,
-        strokeWeight: 5,
-        clickable: false,
-        editable: true,
-        zIndex: 1
-      }
-    });
-    drawingManager.setMap(map);
-  }
-```
+Under templates, you will find the templates for your posts, if you add something in the front matter you also have to add it here!
 
-Above I have adapted my mounted function in a way that now the drawing library will also be loaded. The drawing controls will be switched on and some will be added to the top center. In the end, you will end up having something like this integrated into your web app:
+Under Uploads, you will find your uploaded media for the blog posts.
 
-![](/uploads/result.png)
+The rest should be clear for you if you have vue basics. 
 
 #### Conclusion
 
-Integrating GoogleMaps is an easy task if done right, else it could be a time- and nerve-consuming task. By using the mentioned npm package you will save most of the time and you can focus on using the powerful API you and up with. 
+You must not spend any money when building a blog, you can also come up with fast, beautiful, and flexible solutions by using JAM stacks like this one. 
 
-thanks for reading! If you want to know more about GoogleMaps or got problems or feedback for this article, just [say hi](https://www.the-koi.com/contact), or [buy me a coffee](https://www.buymeacoffee.com/thekoi).
+I will definitely be working on more articles on Building such blogs, so please subscribe to my email list and stay tuned!
+
+I also hope that you have enjoyed reading this article and I would be glad if you send me links to blogs built with this tutorial in the [say Hi section](https://www.the-koi.com/contact). 
+
+thanks for reading! If you want to know more about Gridsome or got problems or feedback for this article, just [say hi](https://www.the-koi.com/contact), or [buy me a coffee](https://www.buymeacoffee.com/thekoi).
 
 Happy coding,
 
