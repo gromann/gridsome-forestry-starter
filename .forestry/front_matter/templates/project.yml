@@ -46,6 +46,7 @@ fields:
     color_format: Hex
   label: Foreground color
 pages:
+- projects/build-a-blog-with-gridsome-and-forestry.md
 - projects/build-an-email-list-using-gridsome-and-mailchimp.md
 - projects/create-and-manage-an-amazon-s3-bucket.md
 - projects/deploy-your-vue-project-to-netlify.md
