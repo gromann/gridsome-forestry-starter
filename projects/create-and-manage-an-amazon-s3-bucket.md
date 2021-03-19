@@ -8,8 +8,9 @@ categories:
 - Cloud
 project_bg_color: ''
 project_fg_color: "#000000"
-sumary: 'Everything you need to know about setting up AWS S3 Buckets, adding IAM users
-  for controlled access, and Configuring CORS to provide safe resource sharing. '
+sumary: Everything you need to know about setting up AWS S3 Buckets, adding IAM users
+  for controlled access, and Configuring CORS for your S3 Bucket, to provide safe
+  resource sharing.
 
 ---
 [In the last part, we were focusing on building a drag&drop Vue component to upload the files.](https://www.the-koi.com/projects/upload-images-from-vue/)
