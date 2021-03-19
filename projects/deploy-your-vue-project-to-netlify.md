@@ -16,7 +16,8 @@ sumary: In this guide, I want to show you how to save nerves and cost when deplo
   a static app to Netlify.  We will set up continuous integration (CI) to deploy your
   vue.Js app to Netlify. I will go through the main interface, register and set up
   a custom domain, and secure everything with HTTPS. This whole process took me less
-  than an hour! So I really think you can save you some time by following this guide!
+  than an hour! So I really think you can save yourself some time by following this
+  guide!
 
 ---
 In this Post i will guide you through the steps i took when deploying an project to Netlify.
