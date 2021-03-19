@@ -41,6 +41,19 @@ query Journal {
 
 <script>
 export default {
+    metaInfo () {
+    return {
+      title: "Journal",
+      meta: [
+        { name: 'description', content: "comming soon! Here i want to share ma day and thoughts with you."},
+        { key:"og:description",  property: "og:description", content: "comming soon! Here i want to share ma day and thoughts with you." },
+        { property: 'og:title', content: "Journal"},
+        { property: 'og:site_name', content: 'the-koi.com/'+"Journal"},
+        {property: 'og:url', content: 'https://the-koi.com/journal'},
+      ],
+    }
+  }
+
 }
 </script>
 

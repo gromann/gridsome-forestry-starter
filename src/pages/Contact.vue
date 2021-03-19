@@ -34,7 +34,20 @@
 </template>
 
 <script>
-export default {}
+export default {
+  metaInfo () {
+    return {
+      title: "Journal",
+      meta: [
+        { name: 'description', content: "Leave me a message!, I will give my best to answere it quickly."},
+        { key:"og:description",  property: "og:description", content: "Leave me a message!, I will give my best to answere it quickly." },
+        { property: 'og:title', content: "Contacr"},
+        { property: 'og:site_name', content: 'the-koi.com/'+"Contact"},
+        {property: 'og:url', content: 'https://the-koi.com/contact'},
+      ],
+    }
+  }
+}
 </script>
 
 <style scoped>
