@@ -1,6 +1,6 @@
 ---
 thumbnail: "/uploads/jessezhou-uvaz8igj_7w-unsplash.jpg"
-title: Safe time, money and nerves by deploying your project to Netlify.
+title: How to deploy your project to Netlify. (fast)
 date: 2021-03-11
 categories:
 - Cloud
@@ -12,10 +12,11 @@ categories:
 - devHack
 project_bg_color: ''
 project_fg_color: "#000000"
-sumary: 'In this guide, I want to show you how to save nerves and cost when deploying
-  a vue.js Application.  We will set up continuous integration to deploy your vue.Js
-  app to netlify. I will go through the main interface, set up a custom domain, and
-  secure everything with HTTPS. '
+sumary: In this guide, I want to show you how to save nerves and cost when deploying
+  a static app to Netlify.  We will set up continuous integration (CI) to deploy your
+  vue.Js app to Netlify. I will go through the main interface, register and set up
+  a custom domain, and secure everything with HTTPS. This whole process took me less
+  than an hour! So I really think you can save you some time by following this guide!
 
 ---
 In this Post i will guide you through the steps i took when deploying an project to Netlify.

@@ -20,7 +20,8 @@ fields:
     schema:
       format: markdown
   label: Sumary
-  description: Provide a short summary of the post in about 150 Words
+  description: Provide a short summary of the post and point out the value, include
+    keywords, this will also be the meta-description!
 - type: datetime
   name: date
   label: Date

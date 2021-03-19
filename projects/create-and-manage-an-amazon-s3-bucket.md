@@ -8,8 +8,9 @@ categories:
 - Cloud
 project_bg_color: ''
 project_fg_color: "#000000"
-sumary: 'Everything you need to know about setting up AWS S3 Buckets, adding IAM users
-  for controlled access, and Configuring CORS to provide safe resource sharing. '
+sumary: Everything you need to know about setting up AWS S3 Buckets, adding IAM users
+  for controlled access, and Configuring CORS for your S3 Bucket, to provide safe
+  resource sharing.
 
 ---
 [In the last part, we were focusing on building a drag&drop Vue component to upload the files.](https://www.the-koi.com/projects/upload-images-from-vue/)
@@ -24,9 +25,9 @@ You can skip this if you want to use another server technology.
 
 Amazon S3 is a cloud storage service from Amazon AWS. When treated right it is fast, secure and with about 0,023 $ per GB, it is also one of the cheapest ways of storing your Data in the Cloud. So let\`s give it a try and start creating a Bucket and upload the first files.
 
-#### Creating the Amazon S3 Bucket
+### Creating the Amazon S3 Bucket
 
-First of all, visit the AWS [console](console.aws.amazon.com "aws console") and log in, or sign up if you are new to AWS.
+First of all, visit the AWS [console](https://aws.amazon.com/console/ "aws console") and log in, or sign up if you are new to AWS.
 
 Up next click on services on the top left and chose S3 under Storage.
 
@@ -44,7 +45,7 @@ Next hit create Bucket, now your bucket is created and we can move on creating I
 
 You also don\`t need to create all folders you will need manually, this happens automatically when uploading the first file to this location. I have wasted a lot of time on this.
 
-#### Add IAM User
+### Add IAM User
 
 Next, navigate to your IAM Management console and click Add user.
 
@@ -61,6 +62,8 @@ I will skip the next steps and resume directly to 5.
 ![](/uploads/iam-access.png)
 
 When everything is done you receive your keys, download the CSV and save it in a safe place, you will need them in part 3.
+
+### Configure CORS for S3
 
 At next set, the right CORS config, **set everything to * won't be an option!**
 
@@ -107,6 +110,10 @@ Bellow is my Configuration:
 This is everything you have to do to create your S3 Bucket. Now you can either directly upload your files, or you can follow my series and start using your own app to upload them.
 
 [In the next part of my series, we are going to bring life into this bucket by pushing from our .net core 3.1 API to it.](https://www.the-koi.com/projects/create-and-manage-an-amazon-s3-bucket/)
+
+### Conclusion
+
+Setting up Amazon S3 buckets is a really quick and easy way to store your Data in the cloud. YOu can get up and running in just a few minutes and by the way, I showed you these files are also protected against unprohibited access. 
 
 I hope I could help you and save you some time, if you got feedback just contact me in the say hi section or [buy me a coffee](https://www.buymeacoffee.com/thekoi) if you want to support me.
 

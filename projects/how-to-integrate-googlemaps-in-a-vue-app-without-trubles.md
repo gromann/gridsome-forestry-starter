@@ -1,6 +1,6 @@
 ---
 thumbnail: "/uploads/img_0853.jpg"
-title: How to integrate GoogleMaps in a vue app without trubles.
+title: How to integrate GoogleMaps in a vue app.
 date: 2021-03-11
 categories:
 - Cloud
@@ -12,8 +12,12 @@ categories:
 - devHack
 project_bg_color: ''
 project_fg_color: "#000000"
-sumary: I will show you a quick and easy way on how to integrate GoogleMaps into your
-  vue.js app.
+sumary: In this article, I want to show you a quick and easy way on how to connect
+  to the google maps API. My article is about vue and google maps, but with small
+  changes, it will work for other frameworks too! After following this guide you will
+  have a component that accesses the Google maps Dynamic API and shows the map on
+  your page, I will also show you how to make use of all other amazing features of
+  google maps like drawing on your map.
 
 ---
 GoogleMaps is awesome, but the GoogleMaps API is even more Awesome. You can not only show places or calculate routes but you're also able to draw on the map, measure distances and even use heatmaps for data visualization.
