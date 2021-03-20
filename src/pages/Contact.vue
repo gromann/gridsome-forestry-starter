@@ -37,11 +37,11 @@
 export default {
   metaInfo () {
     return {
-      title: "Journal",
+      title: "Leave a message",
       meta: [
         { name: 'description', content: "Leave me a message!, I will give my best to answere it quickly."},
         { key:"og:description",  property: "og:description", content: "Leave me a message!, I will give my best to answere it quickly." },
-        { property: 'og:title', content: "Contacr"},
+        { property: 'og:title', content: "leave a message"},
         { property: 'og:site_name', content: 'the-koi.com/'+"Contact"},
         {property: 'og:url', content: 'https://the-koi.com/contact'},
       ],
