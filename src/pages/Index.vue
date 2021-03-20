@@ -45,8 +45,25 @@ export default {
     ProjectsGrid,
     LatestJournals
   },
-  metaInfo: {
-    title: "Home",
+  data () {
+    return{
+      description: "Software development, buissiness and personal groth blog." +
+              "I want to use my knoledge to help you rech your goals. " +
+              " This wil varry from vue.js and .net core development, Creating JAMStack apps over to hosting with AWS and Azure" +
+              "to motivation and investing. So letzt start reading, I'm sure you will get some value from it!"
+    }
+  },
+  metaInfo () {
+    return {
+      title: "Welcome to The Koi!",
+      meta: [
+        { name: 'description', content: this.description},
+        { key:"og:description",  property: "og:description", content: this.description},
+        { property: 'og:title', content: "Welcome to The Koi!"},
+        { property: 'og:site_name', content: 'the-koi.com/'},
+        {property: 'og:url', content: 'https://the-koi.com/'},
+      ],
+    }
   }
 }
 </script>
