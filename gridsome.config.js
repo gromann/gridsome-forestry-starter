@@ -5,7 +5,7 @@ module.exports = {
   siteName: "the koi",
   siteUrl: `https://www.the-koi.com`,
   titleTemplate: `%s | The Koi`,
-  siteDescription: "Software development, buissiness and personal groth blog",
+  // siteDescription: "Software development, buissiness and personal groth blog",
   author: "Alexander Grossmann",
   plugins: [
     {

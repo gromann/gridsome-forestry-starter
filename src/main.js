@@ -22,11 +22,6 @@ export default function(Vue, { head }) {
         name: 'author',
         content: config.author
       },
-/*      {
-        key: 'description',
-        name: 'description',
-        content: config.siteDescription
-      },*/
 
       { name: 'copyright', content: copyRightNotice},
       { key:"og:type",  property: "og:type", content: 'article' },
