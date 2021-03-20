@@ -55,11 +55,11 @@ export default {
   },
   metaInfo () {
     return {
-      title: "Welcome to The Koi!",
+      title: "Welcome to my Blog",
       meta: [
         { name: 'description', content: this.description},
         { key:"og:description",  property: "og:description", content: this.description},
-        { property: 'og:title', content: "Welcome to The Koi!"},
+        { property: 'og:title', content: "Welcome to my Blog"},
         { property: 'og:site_name', content: 'the-koi.com/'},
         {property: 'og:url', content: 'https://the-koi.com/'},
       ],
