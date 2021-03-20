@@ -3,7 +3,7 @@
     <div class="container">
 
       <div class="contact-header">
-        <h1 class="contact-title">Say hi!</h1>
+        <h1 class="contact-title">Leave me a message!</h1>
         <p>Leave me a note with any questions you might have, I'll get back to you as soon as possible.</p>
       </div>
 

@@ -43,7 +43,7 @@ query Journal {
 export default {
     metaInfo () {
     return {
-      title: "Journal",
+      title: "All Journal posts",
       meta: [
         { name: 'description', content: "comming soon! Here i want to share ma day and thoughts with you."},
         { key:"og:description",  property: "og:description", content: "comming soon! Here i want to share ma day and thoughts with you." },
