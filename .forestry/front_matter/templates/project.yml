@@ -11,6 +11,13 @@ fields:
   label: Title
   config:
     required: true
+- name: meta-description
+  type: text
+  config:
+    required: false
+  label: meta-description
+  description: Put meta description here! This is what the user will see in the search
+    results, so it must be awesome!
 - name: sumary
   type: textarea
   default: ''
@@ -46,13 +53,6 @@ fields:
   config:
     color_format: Hex
   label: Foreground color
-- name: meta-description
-  type: text
-  config:
-    required: false
-  label: meta-description
-  description: Put meta description here! This is what the user will see in the search
-    results, so it must be awesome!
 pages:
 - projects/build-a-blog-with-gridsome-and-forestry.md
 - projects/build-an-email-list-using-gridsome-and-mailchimp.md
