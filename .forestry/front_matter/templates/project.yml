@@ -12,9 +12,15 @@ fields:
   config:
     required: true
 - name: meta-description
-  type: text
+  type: textarea
+  default: ''
   config:
     required: false
+    wysiwyg: false
+    schema:
+      format: markdown
+    min: 50
+    max: 300
   label: meta-description
   description: Put meta description here! This is what the user will see in the search
     results, so it must be awesome!
