@@ -1,6 +1,6 @@
 ---
 thumbnail: "/uploads/datei_000.jpeg"
-title: Load your S3 Files blazing fast using AWS CloudFront
+title: Improve your S3 Loading speed with AWS CloudFront
 date: 2021-03-11
 categories:
 - AWS
@@ -11,9 +11,8 @@ categories:
 - Amazon
 project_bg_color: ''
 project_fg_color: "#000000"
-sumary: 'In this guide, I want to show you how to process formData objects in .net,
-  how to connect your API to your AWS resources, and finally how to Stream files through
-  your API on your S3 Bucket. '
+sumary: 'Have you ever faced high loading times from AWS S3 Bucket? I will show you
+  how to improve your loading speed by using AWS CloudFront as CDN. '
 
 ---
 This is the last part of my series on how to Upload images on Amazon S3 from a Vue.Js frontend. In the last part, we have uploaded our Images from a .net core API. You can find it here if you missed it.
