@@ -14,6 +14,9 @@ sumary: |-
   I this guide, I want to show you how to build an amazing Drag&Drop component, to upload one or multiple images in vue.js.
 
   We will use a library called dropzone.js from where you can easily upload images to nearly everywhere.
+meta-description: 'You will learn how to upload multiple files with dropzone.js using
+  vue + nuxt.js. I will show you my fast and easy approach to upload files to your
+  API.  '
 
 ---
 In my first guide, I want to show you how to build a Drag&Drop inside your Vue.js application. This is the first part of the series on how to securely upload your files to an S3 Bucket from vue.js.
