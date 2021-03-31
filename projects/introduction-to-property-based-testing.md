@@ -80,5 +80,10 @@ test("sortIsCorrectlySorting", () => {
 });
 ```
 
-These tests are a bit longer than the unit tests from above but the biggest difference is that there is no actual array created. That means each test is independend from the type of the input. You also need to sort floating point numbers? No problem, just replace fc.integer() with fc.float() in the generator. Where with unit testing you had to rewrite each test.
+These tests are a bit longer than the unit tests from above but the biggest difference is that there is no actual array created. That means each test is independent of the type of input. Do you also need to sort floating point numbers? No problem, just replace fc.integer() with fc.float() in the generator. With unit testing, you probably had to rewrite the arrange part of each test. 
+
+Another advantage is that this code will execute hundreds of times, each time with different input data.
+
 Revisiting the clock building not time telling analogy from my introduction, of course, building the clock takes longer than telling the time, but in a long run, it is way faster giving someone this clock than telling the time every time.
+
+### How to find an error?
