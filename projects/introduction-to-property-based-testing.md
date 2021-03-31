@@ -18,7 +18,7 @@ project_bg_color: ''
 project_fg_color: ''
 
 ---
-When realizing a Software Project, testing is a crucial part and could take up to [50% of the project cos](https://jaxenter.com/time-estimation-for-software-testing-128078.html#:\~:text=Statistically%20speaking%2C%20testing%20occupies%2020,as%2035%20to%2050%20percent.)t. Especially in a Startup where changes happen daily and must be implemented without much effort. My own experience with testing was that the arrange part of a Unit test takes the biggest amount of effort. Even by using builder patterns, or parameterized tests, you still have to write multiple times the same code just checking for other values. Which does not only costs you time when writing your unit tests but also builds a longer refactoring tail when changing your code. 
+When realizing a Software Project, testing is a crucial part and could take up to [50% of the project cos](https://jaxenter.com/time-estimation-for-software-testing-128078.html#:\~:text=Statistically%20speaking%2C%20testing%20occupies%2020,as%2035%20to%2050%20percent.)t. Especially in a Startup where changes happen daily and must be implemented without much effort. My own experience with testing was that the arrange part of a Unit test takes the biggest amount of effort. Even by using builder patterns, or parameterized tests, you still have to write multiple times the same code just checking for other values. Which does not only costs you time when writing your unit tests but also builds a longer refactoring tail when changing your code.
 
 Furthermore, it is the most crucial part of the test, if the test data is weak the whole test will be. This leads to an analogy width clock building, not time telling written by JimCollins \[7\]
 
@@ -28,9 +28,9 @@ Writing unit tests would be time telling, sure you could say with confidence tha
 
 ### What is Property-based Testing
 
-Property-based testing is a testing technique where random input data is used to produce an output, which then has to fulfill different properties. 
+Property-based testing is a testing technique where random input data is used to produce an output, which then has to fulfill different properties.
 
-This testing technique combines random testing by covering a high amount of input values with example-based testing by reaching high feature compliance, as described in the image below. 
+This testing technique combines random testing by covering a high amount of input values with example-based testing by reaching high feature compliance, as described in the image below.
 
 ![Property based testing compared to other testing techniques.](/uploads/property-based-testing-vs-unit-testing.png)
 
@@ -38,11 +38,46 @@ In contrast to Example-based testing, these properties do not have to go into de
 
 ### Property-based Testing compared to Unit testing
 
-I will compare testing a sort function by Unit and property-based testing. The tested sort function should be able to sort an array of integers in ascending order. With unit testing, testing will look something like bellow. 
+I will compare testing a sort function by Unit and property-based testing. The tested sort function should be able to sort an array of integers in ascending order. With unit testing, testing will look something like bellow.
 
+``` js
     test("sortIsCorrectlySorting", () => {
       expect(sort([])).toEqual([]);
       expect(sort([0])).toEqual([0]);
       expect(sort(null)).toEqual(null);
       expect(sort([1, 4, 3, 2, 5])).toEqual([1, 2, 3, 4, 5]);
     });
+```
+
+These tests are good to validate the code’s behavior in edge cases and for just one given array. But what if there is an off-by-one error in the implementation of sort, the above tests would not be able to detect this. So an ideal test of this function should go over the complete definition area of the system under test (SUT). For sort, this would be every array of integers, so writing unit tests for every array of integers would be a lot of work. 
+
+If we could generate arrays of random length filled with random integers this would save a lot of work. This is exactly what property-based testing does, for example when testing a new sort algorithm there will be automatically created hundreds of different arrays, then the SUT will be executed. To verify the Output of the sort function there is now no need to execute another sort function and compare the two arrays with each other as we did in the Unit test. Instead, there will be defined Properties that hold for every possible input. 
+
+For this given example good properties would be:
+
+* The length before and after sort will stay the same
+* Sorting the Array twice will lead to the same Result
+* Every item in the sorted array must be smaller than its successor
+
+ These properties are implemented in javaScript using the awesome framework fast.Check in the example test below.  
+
+``` js 
+
+test("sortIsCorrectlySorting", () => {
+  fc.assert(
+    fc.property(fc.array(fc.integer()), array => {
+      var sorted = sort(array);
+      // The length before and after sort will stay the same
+      expect(sorted).toHaveLength(array.length);
+      // Sorting the Array twice will lead to the same Result
+      expect(arrayEquals(sorted, sort(sorted))).toBe(true);
+      // Every item in the sorted array must be smaller than its successor
+      sorted.foreach(item => {
+        expect(item).toBeLessThanOrEqual(sorted[sorted.findIndex(item) + 1]);
+      });
+    })
+  );
+});
+```
+These tests are a bit longer than the unit tests from above but the biggest difference is that there is no actual array created. That means each test is independend from the type of the input. You also need to sort floating point numbers? No problem, just replace fc.integer() with fc.float() in the generator. Where with unit testing you had to rewrite each test.
+Revisiting the clock building not time telling analogy from my introduction, of course, building the clock takes longer than telling the time, but in a long run, it is way faster giving someone this clock than telling the time every time.
