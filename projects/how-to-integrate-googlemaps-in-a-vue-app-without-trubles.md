@@ -12,12 +12,16 @@ categories:
 - devHack
 project_bg_color: ''
 project_fg_color: "#000000"
-sumary: In this article, I want to show you a quick and easy way on how to connect
-  to the google maps API. My article is about vue and google maps, but with small
-  changes, it will work for other frameworks too! After following this guide you will
-  have a component that accesses the Google maps Dynamic API and shows the map on
-  your page, I will also show you how to make use of all other amazing features of
-  google maps like drawing on your map.
+sumary: In this article, I want to show you a quick and easy way on how to get your
+  Google Maps API key and connect to the google maps API. My article is about vue
+  and google maps, but with small changes, it will work for other frameworks too!
+  After following this guide you will have a component that accesses the Google maps
+  Dynamic API and shows the map on your page, I will also show you how to make use
+  of all other amazing features of google maps like drawing on your map.
+meta-description: In this article, I want to show you a quick and easy way on how
+  to get your Google Maps API key and connect to the google maps API. My article is
+  about vue and google maps, but with small changes, it will work for other frameworks
+  too!
 
 ---
 GoogleMaps is awesome, but the GoogleMaps API is even more Awesome. You can not only show places or calculate routes but you're also able to draw on the map, measure distances and even use heatmaps for data visualization.
@@ -28,9 +32,9 @@ Let´s get started by creating an API Key.
 
 GoogleMaps is not a free service, so before you can get access to it, you have to sign up for an API Key.
 
-For this go to the [google cloud developer console](https://console.cloud.google.com/apis/credentials) create an account and a project if you don't have it already, and then go to **APIs** and **Credentials**. From there, under **create credentials**, you can create new API Keys to use in your apps. Next you add permissions to your keys.
+For this go to the [google cloud developer console](https://console.cloud.google.com/apis/credentials) create an account and a project if you don't have it already, and then go to **APIs** and **Credentials**. From there, under **create credentials**, you can create new API Keys to use in your apps. Next, you add permissions to your keys.
 
-For this navigate to [**libary**](https://console.cloud.google.com/apis/library), and chose all the libraries you want to get access to.
+For this navigate to [**library**](https://console.cloud.google.com/apis/library), and chose all the libraries you want to get access to.
 
 ![](/uploads/maps-lib.png)
 
@@ -132,7 +136,7 @@ Above I have adapted my mounted function in a way that now the drawing library w
 
 #### Conclusion
 
-Integrating GoogleMaps is an easy task if done right, else it could be a time- and nerve-consuming task. By using the mentioned npm package you will save most of the time and you can focus on using the powerful API you and up with. 
+Integrating GoogleMaps is an easy task if done right, else it could be a time- and nerve-consuming task. By using the mentioned npm package you will save most of the time and you can focus on using the powerful API you and up with.
 
 thanks for reading! If you want to know more about GoogleMaps or got problems or feedback for this article, just [say hi](https://www.the-koi.com/contact), or [buy me a coffee](https://www.buymeacoffee.com/thekoi).
 
