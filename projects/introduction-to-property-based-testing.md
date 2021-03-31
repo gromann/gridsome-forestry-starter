@@ -49,9 +49,9 @@ I will compare testing a sort function by Unit and property-based testing. The t
     });
 ```
 
-These tests are good to validate the code’s behavior in edge cases and for just one given array. But what if there is an off-by-one error in the implementation of sort, the above tests would not be able to detect this. So an ideal test of this function should go over the complete definition area of the system under test (SUT). For sort, this would be every array of integers, so writing unit tests for every array of integers would be a lot of work. 
+These tests are good to validate the code’s behavior in edge cases and for just one given array. But what if there is an off-by-one error in the implementation of sort, the above tests would not be able to detect this. So an ideal test of this function should go over the complete definition area of the system under test (SUT). For sort, this would be every array of integers, so writing unit tests for every array of integers would be a lot of work.
 
-If we could generate arrays of random length filled with random integers this would save a lot of work. This is exactly what property-based testing does, for example when testing a new sort algorithm there will be automatically created hundreds of different arrays, then the SUT will be executed. To verify the Output of the sort function there is now no need to execute another sort function and compare the two arrays with each other as we did in the Unit test. Instead, there will be defined Properties that hold for every possible input. 
+If we could generate arrays of random length filled with random integers this would save a lot of work. This is exactly what property-based testing does, for example when testing a new sort algorithm there will be automatically created hundreds of different arrays, then the SUT will be executed. To verify the Output of the sort function there is now no need to execute another sort function and compare the two arrays with each other as we did in the Unit test. Instead, there will be defined Properties that hold for every possible input.
 
 For this given example good properties would be:
 
@@ -59,7 +59,7 @@ For this given example good properties would be:
 * Sorting the Array twice will lead to the same Result
 * Every item in the sorted array must be smaller than its successor
 
- These properties are implemented in javaScript using the awesome framework fast.Check in the example test below.  
+These properties are implemented in JavaScript using the awesome framework [fast-Check](https://dubzzz.github.io/fast-check.github.com/) below.
 
 ``` js 
 
@@ -79,5 +79,6 @@ test("sortIsCorrectlySorting", () => {
   );
 });
 ```
+
 These tests are a bit longer than the unit tests from above but the biggest difference is that there is no actual array created. That means each test is independend from the type of the input. You also need to sort floating point numbers? No problem, just replace fc.integer() with fc.float() in the generator. Where with unit testing you had to rewrite each test.
 Revisiting the clock building not time telling analogy from my introduction, of course, building the clock takes longer than telling the time, but in a long run, it is way faster giving someone this clock than telling the time every time.
