@@ -27,3 +27,22 @@ Furthermore, it is the most crucial part of the test, if the test data is weak t
 Writing unit tests would be time telling, sure you could say with confidence that the code under test will work for every specific case the test was written. But it would make much more sense to build a clock, in this case, a property-based test that is able to verify the correctness of a program for every possible input. This gives the test also the possibility to detect more uncommon errors by generating values over the whole input range. Property-based testing can speed up the testing process and increase the quality of tests in our project and makes more time for implementing new well-tested features. Which according to [Hughes et.al.](https://dl.acm.org/doi/10.1145/1988042.1988046) was also their main goal when Implementing the first property-based testing framework QuickCheck.
 
 ### What is Property-based Testing
+
+Property-based testing is a testing technique where random input data is used to produce an output, which then has to fulfill different properties. 
+
+This testing technique combines random testing by covering a high amount of input values with example-based testing by reaching high feature compliance, as described in the image below. 
+
+![Property based testing compared to other testing techniques.](/uploads/property-based-testing-vs-unit-testing.png)
+
+In contrast to Example-based testing, these properties do not have to go into details about an output. So there must not be an oracle to produce another output value, this output value will be compared to. Moreover, there will be characteristics derived from the specifications the output has to fulfill.
+
+### Property-based Testing compared to Unit testing
+
+I will compare testing a sort function by Unit and property-based testing. The tested sort function should be able to sort an array of integers in ascending order. With unit testing, testing will look something like bellow. 
+
+    test("sortIsCorrectlySorting", () => {
+      expect(sort([])).toEqual([]);
+      expect(sort([0])).toEqual([0]);
+      expect(sort(null)).toEqual(null);
+      expect(sort([1, 4, 3, 2, 5])).toEqual([1, 2, 3, 4, 5]);
+    });
