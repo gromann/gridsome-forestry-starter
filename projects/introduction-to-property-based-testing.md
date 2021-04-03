@@ -1,6 +1,6 @@
 ---
 date: 2021-03-31
-thumbnail: ''
+thumbnail: "/uploads/dog-testing-software.jpg"
 title: Introduction to Property-based testing
 meta-description: In this article, I will give you an overview of this random testing
   technique. This technique will help you to decrease your testing effort and is a
