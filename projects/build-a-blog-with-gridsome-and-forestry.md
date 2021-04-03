@@ -13,6 +13,8 @@ project_fg_color: "#000000"
 sumary: "Gridsome is an awesome framework when it comes to blogging, and forestry
   is the perfect CMS for easily getting started! \n\nIn this post, I want to show
   you how to set up your personal blog fast and for free by using those two frameworks."
+meta-description: 'I will show you how to save money and gain flexibility by building
+  your Blog wir an JAMStack like Forestry and vue/ Gridsome '
 
 ---
 When it comes to creating a blog, most people tend to chose WordPress with Elementor. This sounds also like an amazing combination, there are a whole bunch of finished teams and also a high amount of plugins for integrating ads, analytics, or optimizing SEO. But it comes at a cost. You will have to pay for the commercial WordPress, maybe for some plugins and themes, and since WordPress needs a Database, you will need to pay for domain hosting.
