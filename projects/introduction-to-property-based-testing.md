@@ -1,7 +1,7 @@
 ---
 date: 2021-03-31
 thumbnail: ''
-title: Introduction to Property based testing
+title: Introduction to Property-based testing
 meta-description: In this article, I will give you an overview of this random testing
   technique. This technique will help you to decrease your testing effort and is a
   huge time saver in my software projects.
@@ -24,7 +24,7 @@ Furthermore, it is the most crucial part of the test, if the test data is weak t
 
 > ” Excerpts from Built to Last Imagine you met a remarkable person who could look at the sun or stars at any time of day or night and state the exact time and date: “It’s April 23, 1401,2:36 A.M., and 12 seconds.” This person would be an amazing time teller, and we'd probably revere that person for the ability to tell time. But wouldn’t that person be even more amazing if, instead of telling the time, he or she built a clock that could tell the time forever, even after he or she was dead and gone?”
 
-Writing unit tests would be time telling, sure you could say with confidence that the code under test will work for every specific case the test was written. But it would make much more sense to build a clock, in this case, a property-based test that is able to verify the correctness of a program for every possible input. This gives the test also the possibility to detect more uncommon errors by generating values over the whole input range. Property-based testing can speed up the testing process and increase the quality of tests in our project and makes more time for implementing new well-tested features. Which according to [Hughes et.al.](https://dl.acm.org/doi/10.1145/1988042.1988046) was also their main goal when Implementing the first property-based testing framework QuickCheck.
+Writing unit tests would be time telling, sure you could say with confidence that the code under test will work for every specific case the test was written. But it would make much more sense to build a clock, in this case, a property-based test that can verify the correctness of a program for every possible input. This gives the test also the possibility to detect more uncommon errors by generating values over the whole input range. Property-based testing can speed up the testing process and increase the quality of tests in our project and makes more time for implementing new well-tested features. Which according to [Hughes et.al.](https://dl.acm.org/doi/10.1145/1988042.1988046) was also their main goal when Implementing the first property-based testing framework QuickCheck.
 
 ### What is Property-based Testing
 
@@ -80,7 +80,7 @@ test("sortIsCorrectlySorting", () => {
 });
 ```
 
-These tests are a bit longer than the unit tests from above but the biggest difference is that there is no actual array created. That means each test is independent of the type of input. Do you also need to sort floating point numbers? No problem, just replace fc.integer() with fc.float() in the generator. With unit testing, you probably had to rewrite the arrange part of each test. 
+These tests are a bit longer than the unit tests from above but the biggest difference is that there is no actual array created. That means each test is independent of the type of input. Do you also need to sort floating point numbers? No problem, just replace fc.integer() with fc.float() in the generator. With unit testing, you probably had to rewrite the arrange part of each test.
 
 Another advantage is that this code will execute hundreds of times, each time with different input data.
 
@@ -88,4 +88,12 @@ Revisiting the clock building not time telling analogy from my introduction, of 
 
 ### How to find an error?
 
+But what is if a test case fails? With so many test runs with different data, how can I find an Input that caused the error?
+
+If a test case fails the failing output of the test case will be minimized to a minimal failing test case and as always the line in where the test case failed. This process is called shrinking and is giving the developer the possibility to reproduce the failing test case and to find the bug that caused the error. Many frameworks like fast check also provide the possibility to reproduce the test with the same failing test case. For the sort example, you will get the smallest array where the test failed. The shrinking process is similar to delta debugging \[14\], which searches for a minimal input of a failing test case.
+
 ### Conclusion
+
+When it comes to testing, unit testing is like asking for the time, property-based testing is having a watch and no testing is like being somewhere alone without a clock. You can roughly estimate the time but no one knows if the estimation was right.
+
+Property-based testing is also a very effective way to get strong test data since you do not have to write it on your own. Think about the time it takes to provide a unit test with all the data it needs. With property-based testing, you just provide the structure of your data and the frameworks will handle the rest, hundreds of tests with different data will be executed and you will get confidence that your code works for any case.
