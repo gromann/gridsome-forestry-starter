@@ -43,36 +43,36 @@ For JavaScript, there exist several Property-based testing Libraries, all of the
 <td>combine Properties</td>
 <td>no</td>
 <td>no</td>
-<td>\\checkmark</td>
+<td>yes</td>
 </tr>
 <tr>
 <td>Generators</td>
-<td>\\checkmark but different syntax</td>
-<td>\\checkmark but issues with objet Gen</td>
-<td>\\checkmark</td>
+<td>yes but different syntax</td>
+<td>yes but issues with objet Gen</td>
+<td>yes</td>
 </tr>
 <tr>
 <td>Arbitaries</td>
-<td>\\checkmark</td>
+<td>yes</td>
 <td>no</td>
-<td>\\checkmark</td>
+<td>yes</td>
 </tr>
 <tr>
 <td>Model Based Testing</td>
-<td>\\checkmark</td>
+<td>yes</td>
 <td>no</td>
-<td>\\checkmark</td>
+<td>yes</td>
 </tr>
 <tr>
 <td>Jest support</td>
-<td>\\checkmark</td>
-<td>\\checkmark</td>
+<td>yes</td>
+<td>yes</td>
 <td>no</td>
 </tr>
 <tr>
 <td>CI integrable</td>
-<td>\\checkmark</td>
-<td>\\checkmark</td>
+<td>yes</td>
+<td>yes</td>
 <td>no</td>
 </tr>
 <tr>
