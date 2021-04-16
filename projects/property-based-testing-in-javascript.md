@@ -43,36 +43,36 @@ For JavaScript, there exist several Property-based testing Libraries, all of the
 <td>combine Properties</td>
 <td>no</td>
 <td>no</td>
-<td>\\checkmark</td>
+<td>&#10004;</td>
 </tr>
 <tr>
 <td>Generators</td>
-<td>\\checkmark but different syntax</td>
-<td>\\checkmark but issues with objet Gen</td>
-<td>\\checkmark</td>
+<td>&#10004; but different syntax</td>
+<td>&#10004; but issues with objet Gen</td>
+<td>&#10004;</td>
 </tr>
 <tr>
 <td>Arbitaries</td>
-<td>\\checkmark</td>
+<td>&#10004;</td>
 <td>no</td>
-<td>\\checkmark</td>
+<td>&#10004;</td>
 </tr>
 <tr>
 <td>Model Based Testing</td>
-<td>\\checkmark</td>
+<td>&#10004;</td>
 <td>no</td>
-<td>\\checkmark</td>
+<td>&#10004;</td>
 </tr>
 <tr>
 <td>Jest support</td>
-<td>\\checkmark</td>
-<td>\\checkmark</td>
+<td>&#10004;</td>
+<td>&#10004;</td>
 <td>no</td>
 </tr>
 <tr>
 <td>CI integrable</td>
-<td>\\checkmark</td>
-<td>\\checkmark</td>
+<td>&#10004;</td>
+<td>&#10004;</td>
 <td>no</td>
 </tr>
 <tr>
@@ -82,7 +82,7 @@ For JavaScript, there exist several Property-based testing Libraries, all of the
 <td>1.6k</td>
 </tr>
 <tr>
-<td>Last GitHub Commit \\footnote{checked on 14.07.2020}</td>
+<td>Last GitHub Commit (checked on 14.07.2020)</td>
 <td>14.07.2020</td>
 <td>26.03.2018</td>
 <td>07.07.2020</td>
