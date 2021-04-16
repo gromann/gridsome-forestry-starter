@@ -27,68 +27,67 @@ project_fg_color: ''
 For JavaScript, there exist several Property-based testing Libraries, all of them are following Quick-Check \[6\] which was implemented in Haskell. Some of them to mentions are JsVerify \[12\], fast-check \[8\], and test check \[4\]. Another option would be using scala.js and ScalaCheck, but for this approach, you have to import the SUT as a Js. Object into an external scala project and there is no jest support, so the test program must be run by hand every time, and there is no native support for Vue.js which makes UI testing very hard. Also, JsVerifyhas no out of the box jest support, according to its documentation\[12\] they just have support for Mocca and jasmine but not for Jest, and since the last commit was in 2018 and according to this article \[14\] by default there are just very small integers created and not normally distributed values I will not consider using it. In Table 1 fast check test check and scalaCheck are compared about their features and how they will match the needs of the project. TestCheck and FactCheck.js are supported by Jest out of the box. Both of them provide nearly the same functionality of quick-Check and are very well documented. TestCheck is a little bit easier to understand because they use the same naming conventions quickCheck,scalaCheck or FsCheck are using, fastCheck.js is still being maintained since there are still commits on the Github Repository. TestChecks last commit was in 2018, but still, have some issues with test data generation \[14\].
 
 <table>
-    <tr>
-        <td>feature</td>
-        <td>fast-check</td>
-        <td>testcheck</td>
-        <td>scalaCheck</td>
-    </tr>
-    <tr>
-        <td>Shrinking</td>
-        <td>\checkmark</td>
-        <td>\checkmark</td>
-        <td>\checkmark</td>
-    </tr>
-    <tr>
-        <td>combine Properties</td>
-        <td>no</td>
-        <td>no</td>
-        <td>\checkmark</td>
-    </tr>
-    <tr>
-        <td>Generators</td>
-        <td>\checkmark but different syntax</td>
-        <td>\checkmark but issues with objet Gen</td>
-        <td>\checkmark</td>
-    </tr>
-    <tr>
-        <td>Arbitaries</td>
-        <td>\checkmark</td>
-        <td>no</td>
-        <td>\checkmark</td>
-    </tr>
-    <tr>
-        <td>Model Based Testing</td>
-        <td>\checkmark</td>
-        <td>no</td>
-        <td>\checkmark</td>
-    </tr>
-    <tr>
-        <td>Jest support</td>
-        <td>\checkmark</td>
-        <td>\checkmark</td>
-        <td>no</td>
-    </tr>
-    <tr>
-        <td>CI integrable</td>
-        <td>\checkmark</td>
-        <td>\checkmark</td>
-        <td>no</td>
-    </tr>
-    <tr>
-        <td>Stars on GitHub</td>
-        <td>1.5k</td>
-        <td>1.1k</td>
-        <td>1.6k</td>
-    </tr>
-    <tr>
-        <td>Last GitHub Commit \footnote{checked on 14.07.2020}</td>
-        <td>14.07.2020</td>
-        <td>26.03.2018</td>
-        <td>07.07.2020</td>
-    </tr>
+<tr>
+<td>feature</td>
+<td>fast-check</td>
+<td>testcheck</td>
+<td>scalaCheck</td>
+</tr>
+<tr>
+<td>Shrinking</td>
+<td>	&#10004;</td>
+<td>&#10004;</td>
+<td>&#10004;</td>
+</tr>
+<tr>
+<td>combine Properties</td>
+<td>no</td>
+<td>no</td>
+<td>\\checkmark</td>
+</tr>
+<tr>
+<td>Generators</td>
+<td>\\checkmark but different syntax</td>
+<td>\\checkmark but issues with objet Gen</td>
+<td>\\checkmark</td>
+</tr>
+<tr>
+<td>Arbitaries</td>
+<td>\\checkmark</td>
+<td>no</td>
+<td>\\checkmark</td>
+</tr>
+<tr>
+<td>Model Based Testing</td>
+<td>\\checkmark</td>
+<td>no</td>
+<td>\\checkmark</td>
+</tr>
+<tr>
+<td>Jest support</td>
+<td>\\checkmark</td>
+<td>\\checkmark</td>
+<td>no</td>
+</tr>
+<tr>
+<td>CI integrable</td>
+<td>\\checkmark</td>
+<td>\\checkmark</td>
+<td>no</td>
+</tr>
+<tr>
+<td>Stars on GitHub</td>
+<td>1.5k</td>
+<td>1.1k</td>
+<td>1.6k</td>
+</tr>
+<tr>
+<td>Last GitHub Commit \\footnote{checked on 14.07.2020}</td>
+<td>14.07.2020</td>
+<td>26.03.2018</td>
+<td>07.07.2020</td>
+</tr>
 </table>
-
 
 ### Conclusion
 
