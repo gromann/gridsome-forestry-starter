@@ -35,44 +35,44 @@ For JavaScript, there exist several Property-based testing Libraries, all of the
 </tr>
 <tr>
 <td>Shrinking</td>
-<td>	&#10004;</td>
-<td>&#10004;</td>
-<td>&#10004;</td>
+<td>	✔</td>
+<td>✔</td>
+<td>✔</td>
 </tr>
 <tr>
 <td>combine Properties</td>
 <td>no</td>
 <td>no</td>
-<td>&#10004;</td>
+<td>✔</td>
 </tr>
 <tr>
 <td>Generators</td>
-<td>&#10004; but different syntax</td>
-<td>&#10004; but issues with objet Gen</td>
-<td>&#10004;</td>
+<td>✔ but different syntax</td>
+<td>✔ but issues with objet Gen</td>
+<td>✔</td>
 </tr>
 <tr>
 <td>Arbitaries</td>
-<td>&#10004;</td>
+<td>✔</td>
 <td>no</td>
-<td>&#10004;</td>
+<td>✔</td>
 </tr>
 <tr>
 <td>Model Based Testing</td>
-<td>&#10004;</td>
+<td>✔</td>
 <td>no</td>
-<td>&#10004;</td>
+<td>✔</td>
 </tr>
 <tr>
 <td>Jest support</td>
-<td>&#10004;</td>
-<td>&#10004;</td>
+<td>✔</td>
+<td>✔</td>
 <td>no</td>
 </tr>
 <tr>
 <td>CI integrable</td>
-<td>&#10004;</td>
-<td>&#10004;</td>
+<td>✔</td>
+<td>✔</td>
 <td>no</td>
 </tr>
 <tr>
@@ -88,6 +88,51 @@ For JavaScript, there exist several Property-based testing Libraries, all of the
 <td>07.07.2020</td>
 </tr>
 </table>
+
+Based on the findings from above I have chosen fast-check.js for testing my JavaScript code.
+
+### Setting up fast-check
+
+First, the fast check Package needs to be installed, this is done by running the following command
+
+    npm  install  --save -dev fast-check
+
+Then to use fast check import it like following into your test files.
+
+     import * as fc from "fast -check";
+
+Now everything is ready to use. 
+
+### Getting started with fast check
+
+To get started I want to describe a simple example from the fast check documentation.
+
+    const contains = (text, pattern) => text.indexOf(pattern) >= 0;
+    
+    // Properties
+    describe('properties', () => {
+    	// string text always contains itself
+    	it('should always contain itself', () => {
+    		fc.assert(fc.property(fc.string(), text => contains(text, text)));
+    	});
+    	// string a + b + c always contains b, whatever the values of a, b and c
+    	it('should always contain its substrings', () => {
+    		fc.assert(fc.property(fc.string(), fc.string(), fc.string(), (a,b,c) => {
+    			// Alternatively: no return statement and direct usage of expect or assert
+    			return contains(a+b+c, b);
+    		}));
+    	});
+    });
+
+Describe in the above example defines a test Class for Jest and it(... defines the test to run. 
+
+fc.assert runs the property-based test as the first parameter it needs the fc.propery for the test and as the second parameter, it takes the actual code to run. The number of executions could be passed as a parameter, 100 by default.
+
+fc.string is an example of a built-in Arbitrary, it generates a random string, this string could be further parameterized like specifying a maximal and minimal length or the string encoding. 
+
+These arbitraries exist for every simple Datatype.
+
+If the result is true the test will succeed but if one of the runs evaluates to false the test fails and the output will be shrunk to the failing test case.
 
 ### Conclusion
 
