@@ -23,26 +23,26 @@ project_fg_color: ''
 ### Installing axios-mock-adapter
 
 By installing [axios-mock-adapter](https://www.npmjs.com/package/axios-mock-adapter) you will get the ability to mock all axios requests.
-
+``` js
     npm install axios-mock-adapter --save-dev
-
+```
 ### Importing and using axios-mock-adapter in your JavaScript tests
 
 first of all, make sure to Import everything needed into your test file. 
-	```js
+``` js
     import axios from "axios";
     const MockAdapter = require("axios-mock-adapter");
     const mock = new MockAdapter(axios);
     import { yourMockResponse } from "../mockedResponse/yourEndpointSomeId";
-	```
+```
 At next define the requests to mock, for better readability I have defined my URL directly inside the tests, but I would recommend keeping them all in a separate list with URL and mocked response. So you will stay DRY and do not need to search for your response every time you need to mock the same request.
-
+``` js
       mock
         .onGet(
           "yourURL.com/api/yourEndpoint/someId"
         )
         .reply(200, yourMockResponse);
-
+```
 I also highly recommend saving all your responses in your own files, otherwise, your test files themselves would come to a complete mess. 
 
 When everything is done you can use your mock at the top of your test. 
